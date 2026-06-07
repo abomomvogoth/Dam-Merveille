@@ -1,0 +1,69 @@
+[
+  {
+    "id": 1,
+    "name": "Eru",
+    "region": "Sud-Ouest",
+    "origin": "Plat traditionnel des peuplements Bamiléké et Bassas, apprécié pour sa richesse et sa valeur communautaire.",
+    "ingredients": [
+      { "name": "Eru (feuilles)", "quantity": "500 g" },
+      { "name": "Ndolé (feuilles amères)", "quantity": "250 g" },
+      { "name": "Poisson fumé", "quantity": "200 g" },
+      { "name": "Huile de palme", "quantity": "100 ml" },
+      { "name": "Oignon", "quantity": "1" }
+    ],
+    "portions": 4,
+    "videoUrl": "https://www.youtube.com/watch?v=example-eru",
+    "photoUrl": "https://example.com/images/eru.jpg",
+    "description": "Eru est un plat riche du Sud-Ouest du Cameroun, servi avec du water-fufu ou du plantain.",
+    "steps": [
+      "Nettoyer et couper les feuilles d'eru et de ndolé.",
+      "Faire revenir l'oignon et le poisson avec l'huile de palme.",
+      "Ajouter les feuilles et laisser mijoter jusqu'à tendreté.",
+      "Assaisonner et servir chaud avec un accompagnement."],
+    "language": "fr"
+  },
+  {
+    "id": 2,
+    "name": "Achu",
+    "region": "Nord-Ouest",
+    "origin": "Plat emblématique de la région du Nord-Ouest, souvent préparé pour les fêtes et les cérémonies.",
+    "ingredients": [
+      { "name": "Igname jaune", "quantity": "1 kg" },
+      { "name": "Piment", "quantity": "2" },
+      { "name": "Poisson séché", "quantity": "150 g" },
+      { "name": "Huile de palme rouge", "quantity": "120 ml" },
+      { "name": "Piment rouge", "quantity": "1" }
+    ],
+    "portions": 4,
+    "videoUrl": "https://www.youtube.com/watch?v=example-achu",
+    "photoUrl": "https://example.com/images/achu.jpg",
+    "description": "Achu est un plat de pâte de tubercule servi avec une sauce jaune épicée.",
+    "steps": [
+      "Faire cuire la pâte d'igname jusqu'à ce qu'elle soit homogène.",
+      "Préparer la sauce jaune à base de poivre, d'oignon et d'huile de palme.",
+      "Servir la pâte avec la sauce et le poisson séché."],
+    "language": "fr"
+  },
+  {
+    "id": 3,
+    "name": "Ndolé",
+    "region": "Centre / Sud-Ouest",
+    "origin": "Plat national camerounais, originaire des régions du Centre et du Sud-Ouest.",
+    "ingredients": [
+      { "name": "Feuilles de ndolé", "quantity": "500 g" },
+      { "name": "Crevettes", "quantity": "200 g" },
+      { "name": "Viande fumée", "quantity": "200 g" },
+      { "name": "Noix de palme", "quantity": "100 ml" },
+      { "name": "Arachides mixées", "quantity": "150 g" }
+    ],
+    "portions": 4,
+    "videoUrl": "https://www.youtube.com/watch?v=example-ndole",
+    "photoUrl": "https://example.com/images/ndole.jpg",
+    "description": "Ndolé est une spécialité camerounaise, souvent présentée avec du plantain ou du riz.",
+    "steps": [
+      "Bouillir les feuilles de ndolé et les écraser finement.",
+      "Faire cuire la viande et les crevettes avec les arachides et l'huile.",
+      "Ajouter les feuilles et laisser mijoter jusqu'à épaississement."],
+    "language": "fr"
+  }
+]

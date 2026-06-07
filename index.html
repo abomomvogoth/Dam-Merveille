@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TasteCam-Heritage | Preserving Culinary Heritage</title>
+<style>
+  /* ===== RESET & BASE ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #fdf8f0;
+    color: #2d1f0e;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ===== BRAND COLORS ===== */
+  :root {
+    --clay: #c67b4b;
+    --spice: #d4532a;
+    --leaf: #4a7c3f;
+    --cream: #fdf8f0;
+    --earth: #5c3d2e;
+    --gold: #c8963e;
+    --ink: #2d1f0e;
+    --card-bg: #fffaf3;
+    --shadow: 0 6px 24px rgba(92, 61, 46, 0.12);
+  }
+
+  /* ===== NAVIGATION ===== */
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(253, 248, 240, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid #e8d5c0;
+    padding: 0.75rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+  }
+  .navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+  .nav-logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--spice);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .nav-logo span { color: var(--earth); font-size: 1.5rem; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--earth);
+    font-weight: 600;
+    font-size: 0.95rem;
+    position: relative;
+    transition: color 0.3s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--spice);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--spice); }
+  .nav-links a:hover::after { width: 100%; }
+  .menu-toggle { display: none; background: none; border: none; cursor: pointer; font-size: 1.5rem; }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    background: linear-gradient(135deg, #fdf8f0 0%, #f8e8d0 50%, #fdf8f0 100%);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(212, 83, 42, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: heroFloat 8s ease-in-out infinite;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px;
+    left: -40px;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(74, 124, 63, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: heroFloat 6s ease-in-out 2s infinite;
+  }
+  @keyframes heroFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(15px, -20px) scale(1.05); }
+    66% { transform: translate(-10px, 10px) scale(0.95); }
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 850px; }
+  .hero-badge {
+    display: inline-block;
+    background: var(--spice);
+    color: #fff;
+    padding: 0.4rem 1.4rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 0.8s ease-out;
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 0.8s ease-out 0.15s both;
+  }
+  .hero h1 .accent { color: var(--spice); }
+  .hero h1 .accent-green { color: var(--leaf); }
+  .hero p {
+    font-size: 1.2rem;
+    color: #6b5a4a;
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+  }
+  .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeInUp 0.8s ease-out 0.45s both; }
+  .btn {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary { background: var(--spice); color: #fff; box-shadow: 0 4px 16px rgba(212, 83, 42, 0.3); }
+  .btn-primary:hover { background: #b8431e; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212, 83, 42, 0.4); }
+  .btn-outline { background: transparent; color: var(--earth); border: 2px solid var(--clay); }
+  .btn-outline:hover { background: var(--clay); color: #fff; transform: translateY(-2px); }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Floating food decoration */
+  .floating-foods {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .food-emoji {
+    position: absolute;
+    font-size: 2.5rem;
+    opacity: 0.15;
+    animation: floatAround 20s linear infinite;
+  }
+  .food-emoji:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+  .food-emoji:nth-child(2) { top: 20%; right: 8%; animation-delay: -5s; }
+  .food-emoji:nth-child(3) { bottom: 25%; left: 10%; animation-delay: -10s; }
+  .food-emoji:nth-child(4) { bottom: 15%; right: 12%; animation-delay: -15s; }
+  .food-emoji:nth-child(5) { top: 50%; left: 50%; animation-delay: -3s; font-size: 2rem; }
+  @keyframes floatAround {
+    0% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-30px) rotate(5deg); }
+    50% { transform: translateY(-15px) rotate(-3deg); }
+    75% { transform: translateY(-40px) rotate(2deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+  }
+
+  /* ===== SECTION COMMONS ===== */
+  section { padding: 5rem 2rem; }
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .section-tag {
+    display: inline-block;
+    background: #f0e4d4;
+    color: var(--spice);
+    padding: 0.3rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+  }
+  .section-header h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+  }
+  .section-header p { color: #6b5a4a; max-width: 600px; margin: 0 auto; font-size: 1.05rem; }
+
+  /* ===== ABOUT / INTRO ===== */
+  .intro {
+    background: #fff;
+    border-top: 1px solid #e8d5c0;
+    border-bottom: 1px solid #e8d5c0;
+  }
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+  }
+  .intro-text h3 { font-size: 1.8rem; font-weight: 800; color: var(--ink); margin-bottom: 1rem; }
+  .intro-text p { color: #5c4a3a; margin-bottom: 1rem; }
+  .intro-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+  .stat-card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 16px;
+    border: 2px solid #e8d5c0;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .stat-card .num { font-size: 2rem; font-weight: 900; color: var(--spice); }
+  .stat-card .label { font-size: 0.85rem; color: #8b7a6a; font-weight: 600; }
+  .intro-image img {
+    width: 100%;
+    border-radius: 20px;
+    border: 3px solid #e8d5c0;
+    box-shadow: var(--shadow);
+    transition: transform 0.5s ease;
+  }
+  .intro-image img:hover { transform: scale(1.02); }
+
+  /* ===== GALLERY ===== */
+  .gallery-section { background: #fdf8f0; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .gallery-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid #e8d5c0;
+    box-shadow: var(--shadow);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+    cursor: pointer;
+    position: relative;
+  }
+  .gallery-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(92, 61, 46, 0.18);
+    border-color: var(--clay);
+  }
+  .gallery-card img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .gallery-card:hover img { transform: scale(1.05); }
+  .gallery-card-body {
+    padding: 1.5rem;
+  }
+  .gallery-card-body .tag {
+    display: inline-block;
+    background: #fef0e5;
+    color: var(--spice);
+    padding: 0.2rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .gallery-card-body .tag.green { background: #e8f5e0; color: var(--leaf); }
+  .gallery-card-body .tag.blue { background: #e3f0fa; color: #2a6496; }
+  .gallery-card-body h4 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+  .gallery-card-body p { font-size: 0.9rem; color: #8b7a6a; }
+
+  /* ===== ARCHITECTURE SECTION ===== */
+  .architecture { background: #fff; }
+  .arch-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: start;
+  }
+  .arch-text h3 { font-size: 1.8rem; font-weight: 800; color: var(--ink); margin-bottom: 1rem; }
+  .arch-text ul { list-style: none; }
+  .arch-text li {
+    padding: 0.6rem 0;
+    padding-left: 1.8rem;
+    position: relative;
+    color: #5c4a3a;
+    font-weight: 500;
+  }
+  .arch-text li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--spice);
+    font-size: 0.7rem;
+    top: 0.75rem;
+  }
+  .arch-image img {
+    width: 100%;
+    border-radius: 16px;
+    border: 2px solid #e8d5c0;
+    box-shadow: var(--shadow);
+  }
+
+  /* ===== TECH STACK ===== */
+  .tech-stack { background: #fdf8f0; }
+  .stack-marquee {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .stack-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.3rem;
+    background: #fff;
+    border: 2px solid #e8d5c0;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--earth);
+    transition: all 0.3s ease;
+  }
+  .stack-chip:hover {
+    border-color: var(--spice);
+    background: #fef0e5;
+    transform: translateY(-2px);
+  }
+  .stack-chip .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .dot.red { background: var(--spice); }
+  .dot.green { background: var(--leaf); }
+  .dot.gold { background: var(--gold); }
+  .dot.blue { background: #2a6496; }
+  .dot.purple { background: #7c3aed; }
+
+  /* ===== TESTIMONIAL / QUOTE ===== */
+  .quote-section {
+    background: linear-gradient(135deg, var(--spice), #b8431e);
+    color: #fff;
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+  .quote-section blockquote {
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    font-style: italic;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.95;
+  }
+  .quote-section cite { display: block; margin-top: 1rem; font-weight: 700; font-style: normal; opacity: 0.85; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--ink);
+    color: #c4b8a8;
+    padding: 3rem 2rem;
+  }
+  .footer-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+  }
+  .footer h4 { color: #fff; font-size: 1.2rem; margin-bottom: 1rem; font-weight: 800; }
+  .footer a { color: #c4b8a8; text-decoration: none; transition: color 0.3s; }
+  .footer a:hover { color: var(--gold); }
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 2rem auto 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid #4a3525;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+
+  /* ===== LIGHTBOX ===== */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  }
+  .lightbox.active { display: flex; }
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 85vh;
+    border-radius: 12px;
+    animation: zoomIn 0.3s ease;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    font-size: 2.5rem;
+    color: #fff;
+    cursor: pointer;
+    background: none;
+    border: none;
+    z-index: 10;
+  }
+  .lightbox-prev, .lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border: none;
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.3s;
+  }
+  .lightbox-prev:hover, .lightbox-next:hover { background: rgba(255,255,255,0.3); }
+  .lightbox-prev { left: 1.5rem; }
+  .lightbox-next { right: 1.5rem; }
+  @keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* ===== SCROLL REVEAL ===== */
+  .reveal { opacity: 0; transform: translateY(40px); transition: all 0.7s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(253,248,240,0.98); padding: 1rem 2rem 2rem; border-bottom: 2px solid #e8d5c0; }
+    .menu-toggle { display: block; }
+    .intro-grid, .arch-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    section { padding: 3rem 1rem; }
+    .hero { padding: 6rem 1rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="navbar" id="navbar">
+  <a href="#" class="nav-logo">🍲 TasteCam<span>-Heritage</span></a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#architecture">Architecture</a></li>
+    <li><a href="#tech">Tech Stack</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <div class="floating-foods">
+    <span class="food-emoji">🥘</span>
+    <span class="food-emoji">🌶️</span>
+    <span class="food-emoji">🍚</span>
+    <span class="food-emoji">🥬</span>
+    <span class="food-emoji">🧅</span>
+  </div>
+  <div class="hero-content">
+    <span class="hero-badge">HELLO!</span>
+    <h1>Preserving <span class="accent">Culinary Heritage</span> Through <span class="accent-green">Technology</span></h1>
+    <p>A full-stack platform for digitizing, preserving, and discovering traditional recipes from African and Cameroonian culinary traditions.</p>
+    <div class="hero-buttons">
+      <a href="#gallery" class="btn btn-primary">Explore the Project</a>
+      <a href="https://github.com/abomomvogoth/TasteCam-Heritage" target="_blank" class="btn btn-outline">View on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT / INTRODUCTION ===== -->
+<section class="intro" id="about">
+  <div class="intro-grid">
+    <div class="intro-text reveal">
+      <span class="section-tag">About the Project</span>
+      <h3>A Platform for Culinary Storytelling</h3>
+      <p>TasteCam-Heritage is a web-based application designed to digitize, preserve, and promote culinary heritage. Food is one of the most powerful expressions of culture and identity — yet traditional recipes risk being lost as communities modernize.</p>
+      <p>This project addresses that challenge by providing a structured, searchable, community-driven platform where users can discover, share, and archive traditional recipes from diverse cultural backgrounds, with a particular focus on African and Cameroonian culinary traditions.</p>
+      <div class="intro-stats">
+        <div class="stat-card">
+          <div class="num"></div>
+          <div class="label">CHOOSE</div>
+        </div>
+        <div class="stat-card">
+          <div class="num"></div>
+          <div class="label">EAT</div>
+        </div>
+        <div class="stat-card">
+          <div class="num"></div>
+          <div class="label">AND</div>
+        </div>
+        <div class="stat-card">
+          <div class="num"></div>
+          <div class="label">ENJOY</div>
+        </div>
+      </div>
+    </div>
+    <div class="intro-image reveal">
+      <img src="IMG-20260606-WA0131.jpg" alt="TasteCam-Heritage Homepage" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section class="gallery-section" id="gallery">
+  <div class="section-header reveal">
+    <span class="section-tag">Gallery</span>
+    <h2>Visual Journey..</h2>
+    <p>Explore the TasteCam-Heritage platform showcasing traditional African dishes.</p>
+  </div>
+  <div class="gallery-grid">
+
+    <div class="gallery-card reveal" onclick="openLightbox(0)">
+      <img src="IMG-20260606-WA0131.jpg" alt="TasteCam-Heritage Platform Homepage" loading="lazy">
+      <div class="gallery-card-body">
+        <span class="tag">Traditional Dish</span>
+        <h4>Garri and Eru</h4>
+        <p>A traditional Cameroonian dish made with eru leaves, waterleaf, palm oil, and assorted meats or fish. It is commonly served with garri and enjoyed across the Southwest and Northwest regions.</p>
+      </div>
+    </div>
+
+    <div class="gallery-card reveal" onclick="openLightbox(1)">
+      <img src="IMG-20260606-WA0132.jpg" alt="Ndole Recipe — Traditional Cameroonian Bitterleaf Stew" loading="lazy">
+      <div class="gallery-card-body">
+        <span class="tag green">Traditional Dish</span>
+        <h4>Sanga</h4>
+        <p>A flavorful meal prepared from fresh maize, cocoyam leaves, and palm oil. This nutritious dish is especially popular in the coastal regions of Cameroon.</p>
+      </div>
+    </div>
+
+    <div class="gallery-card reveal" onclick="openLightbox(2)">
+      <img src="IMG-20260606-WA0133.jpg" alt="System Architecture Diagram" loading="lazy">
+      <div class="gallery-card-body">
+        <span class="tag blue">Traditional Dish</span>
+        <h4>Ndolé with Cassava Sticks and Fried Plantains</h4>
+        <p>One of Cameroon’s most famous dishes, prepared with bitterleaf, groundnuts, spices, and your choice of meat, fish, or shrimp. It is traditionally served with cassava sticks and fried plantains.</p>
+      </div>
+    </div>
+
+    <div class="gallery-card reveal" onclick="openLightbox(3)">
+      <img src="IMG-20260606-WA0134.jpg" alt="UML Diagrams" loading="lazy">
+      <div class="gallery-card-body">
+        <span class="tag blue">Traditional Dish</span>
+        <h4>4. Okok with Cassava Sticks</h4>
+        <p>A traditional forest-region delicacy made from finely ground okok leaves mixed with peanuts, palm oil, and seasonings. It is commonly enjoyed with cassava sticks.</p>
+      </div>
+    </div>
+
+    <div class="gallery-card reveal" onclick="openLightbox(4)">
+      <img src="IMG-20260606-WA0135.jpg" alt="Jenkins CI/CD Pipeline" loading="lazy">
+      <div class="gallery-card-body">
+        <span class="tag">Traditional Dish</span>
+        <h4>Achu and Yellow Soup</h4>
+        <p>A beloved Grassfields dish consisting of pounded cocoyams served with a rich yellow soup, meat, fish, cow skin, and traditional spices.</p>
+      </div>
+    </div>
+
+    <div class="gallery-card reveal" onclick="openLightbox(5)">
+      <img src="IMG-20260606-WA0136.jpg" alt="Kubernetes Deployments" loading="lazy">
+      <div class="gallery-card-body">
+        <span class="tag green">Traditional Dish</span>
+        <h4>Koko with Cassava Couscous</h4>
+        <p>A traditional dish from the East Region of Cameroon, prepared with wild forest vegetables and local seasonings. It is commonly served with cassava couscous.</p>
+      </div>
+    </div>
+
+    <div class="gallery-card reveal" onclick="openLightbox(6)">
+      <img src="IMG-20260606-WA0137.jpg" alt="Jest Test Coverage Report" loading="lazy">
+      <div class="gallery-card-body">
+        <span class="tag blue">Traditional Dish</span>
+        <h4>koki</h4>
+        <p>A steamed bean cake made from blended black-eyed peas, palm oil, and spices. It is a popular and nutritious meal enjoyed throughout Cameroon.</p>
+      </div>
+    </div>
+
+    <div class="gallery-card reveal" onclick="openLightbox(7)">
+      <img src="IMG-20260606-WA0138.jpg" alt="Docker Build Process" loading="lazy">
+      <div class="gallery-card-body">
+        <span class="tag">Traditional Dish</span>
+        <h4>Catfish Pepper Soup</h4>
+        <p>A spicy and aromatic broth prepared with fresh catfish, local herbs, and traditional spices. It is appreciated for its rich flavor and comforting warmth.</p>
+      </div>
+    </div>
+
+    <div class="gallery-card reveal" onclick="openLightbox(8)">
+      <img src="IMG-20260606-WA0139.jpg" alt="Prometheus & Grafana Monitoring" loading="lazy">
+      <div class="gallery-card-body">
+        <span class="tag green">City Dish</span>
+        <h4>Groundnut Sauce with Cassava</h4>
+        <p>A rich and creamy peanut-based sauce cooked with meat or fish and served with cassava. It is a favorite comfort meal in many Cameroonian households.</p>
+      </div>
+    </div>
+
+    <div class="gallery-card reveal" onclick="openLightbox(9)">
+      <img src="IMG-20260606-WA0140.jpg" alt="Recipe Management Interface with African Dishes" loading="lazy">
+      <div class="gallery-card-body">
+        <span class="tag">Traditional Dish</span>
+        <h4>Bongo Tchobi</h4>
+        <p>A traditional Cameroonian fish or meat stew prepared with blackened spices, creating its distinctive dark color and deep smoky flavor. It is commonly served with plantains or cassava.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== ARCHITECTURE ===== -->
+<section class="architecture" id="architecture">
+  <div class="section-header reveal">
+    <span class="section-tag">System Design</span>
+    <h2>Modern Layered Architecture</h2>
+    <p>TasteCam-Heritage follows an N-Tier architecture with clear separation of concerns across presentation, business logic, and data layers.</p>
+  </div>
+  <div class="arch-grid">
+    <div class="arch-text reveal">
+      <h3>Architectural Components</h3>
+      <ul>
+        <li><strong>Frontend</strong> — Serves the user interface on port 4000, communicating via HTTP REST calls</li>
+        <li><strong>Backend API</strong> — Node.js + Express.js on port 3000, handling all business logic and database operations</li>
+        <li><strong>PostgreSQL Database</strong> — Stores recipes, categories, and user data with pg driver</li>
+        <li><strong>Docker Containerization</strong> — Consistent environments for both frontend and backend services</li>
+        <li><strong>Kubernetes Orchestration</strong> — 2-replica deployments with RollingUpdate and health probes</li>
+        <li><strong>Jenkins CI/CD</strong> — Automated pipeline: Checkout → Install → Test → Build → Deploy</li>
+        <li><strong>Prometheus & Grafana</strong> — Metrics collection and real-time dashboard visualization</li>
+        <li><strong>Ansible IaC</strong> — Automated provisioning of VPS infrastructure</li>
+      </ul>
+    </div>
+    <div class="arch-image reveal">
+      <img src="IMG-20260606-WA0133.jpg" alt="System Architecture Diagram" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ===== TECH STACK ===== -->
+<section class="tech-stack" id="tech">
+  <div class="section-header reveal">
+    <span class="section-tag">Tech Stack</span>
+    <h2>Technologies & Tools</h2>
+    <p>The full suite of modern tools and frameworks powering the TasteCam-Heritage platform.</p>
+  </div>
+  <div class="stack-marquee reveal">
+    <span class="stack-chip"><span class="dot red"></span> Node.js</span>
+    <span class="stack-chip"><span class="dot red"></span> Express.js</span>
+    <span class="stack-chip"><span class="dot green"></span> PostgreSQL</span>
+    <span class="stack-chip"><span class="dot blue"></span> Docker</span>
+    <span class="stack-chip"><span class="dot blue"></span> Kubernetes</span>
+    <span class="stack-chip"><span class="dot red"></span> Jenkins</span>
+    <span class="stack-chip"><span class="dot gold"></span> Prometheus</span>
+    <span class="stack-chip"><span class="dot gold"></span> Grafana</span>
+    <span class="stack-chip"><span class="dot purple"></span> Ansible</span>
+    <span class="stack-chip"><span class="dot green"></span> Jest</span>
+    <span class="stack-chip"><span class="dot blue"></span> Supertest</span>
+    <span class="stack-chip"><span class="dot red"></span> Swagger</span>
+    <span class="stack-chip"><span class="dot green"></span> Nodemon</span>
+    <span class="stack-chip"><span class="dot gold"></span> dotenv</span>
+    <span class="stack-chip"><span class="dot blue"></span> GitHub</span>
+  </div>
+</section>
+
+<!-- ===== QUOTE ===== -->
+<section class="quote-section reveal">
+  <blockquote>
+    "Culinary heritage represents centuries of cultural knowledge. TasteCam-Heritage fills the gap by providing a structured, searchable, and community-driven platform for culinary heritage preservation, built on robust and scalable software architecture principles."
+  </blockquote>
+  <cite>— Abomo Mvogo Therese Damaris, ICTU20241280</cite>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer" id="contact">
+  <div class="footer-grid">
+    <div>
+      <h4>🍲 TasteCam-Heritage</h4>
+      <p>A platform for preserving and discovering culinary heritage. SEN3244 — Software Architecture Final Project, Spring 2026.</p>
+    </div>
+    <div>
+      <h4>Links</h4>
+      <p><a href="https://github.com/abomomvogoth/TasteCam-Heritage" target="_blank">GitHub Repository</a></p>
+      <p><a href="#about">About Project</a></p>
+      <p><a href="#gallery">Gallery</a></p>
+      <p><a href="#architecture">Architecture</a></p>
+    </div>
+    <div>
+      <h4>Student</h4>
+      <p>Abomo Mvogo Therese Damaris</p>
+      <p>ICTU20241280</p>
+      <p>The ICT University</p>
+      <p>Instructor: Engr. Tekoh Palma</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 TasteCam-Heritage. All rights reserved. Built with passion for culinary heritage preservation.
+  </div>
+</footer>
+
+<!-- ===== LIGHTBOX ===== -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <button class="lightbox-prev" onclick="prevImage()">‹</button>
+  <button class="lightbox-next" onclick="nextImage()">›</button>
+  <img src="" alt="Lightbox image" id="lightboxImg">
+</div>
+
+<script>
+  // ===== IMAGE LIST =====
+  const images = [
+    'IMG-20260606-WA0131.jpg',
+    'IMG-20260606-WA0132.jpg',
+    'IMG-20260606-WA0133.jpg',
+    'IMG-20260606-WA0134.jpg',
+    'IMG-20260606-WA0135.jpg',
+    'IMG-20260606-WA0136.jpg',
+    'IMG-20260606-WA0137.jpg',
+    'IMG-20260606-WA0138.jpg',
+    'IMG-20260606-WA0139.jpg',
+    'IMG-20260606-WA0140.jpg'
+  ];
+  let currentImageIndex = 0;
+
+  function openLightbox(index) {
+    currentImageIndex = index;
+    document.getElementById('lightboxImg').src = images[index];
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function nextImage() {
+    currentImageIndex = (currentImageIndex + 1) % images.length;
+    document.getElementById('lightboxImg').src = images[currentImageIndex];
+  }
+
+  function prevImage() {
+    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+    document.getElementById('lightboxImg').src = images[currentImageIndex];
+  }
+
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (!document.getElementById('lightbox').classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') nextImage();
+    if (e.key === 'ArrowLeft') prevImage();
+  });
+
+  // ===== MOBILE MENU =====
+  document.getElementById('menuToggle').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  document.querySelectorAll('#navLinks a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  // ===== NAVBAR SCROLL EFFECT =====
+  window.addEventListener('scroll', function() {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 50) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // ===== SCROLL REVEAL =====
+  const revealElements = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+</script>
+
+</body>
+</html>

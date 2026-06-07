@@ -1,0 +1,207 @@
+openapi: 3.0.0
+info:
+  title: TasteCam Heritage API
+  description: API for managing traditional Cameroonian recipes
+  version: 1.0.0
+  contact:
+    name: TasteCam Heritage Team
+    url: https://github.com/TasteCam-Heritage
+
+servers:
+  - url: http://localhost:4000/api
+    description: Development server
+  - url: https://api.tastecam.cam/api
+    description: Production server
+
+paths:
+  /health:
+    get:
+      summary: Health check
+      tags:
+        - Health
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  service:
+                    type: string
+              example:
+                status: ok
+                service: TasteCam Heritage API
+
+  /recipes:
+    get:
+      summary: Get all recipes
+      tags:
+        - Recipes
+      parameters:
+        - name: region
+          in: query
+          schema:
+            type: string
+          description: Filter by region
+        - name: language
+          in: query
+          schema:
+            type: string
+            enum: [fr, en]
+          description: Language for recipe details
+      responses:
+        '200':
+          description: List of recipes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipe'
+
+  /recipes/search:
+    get:
+      summary: Search recipes by ingredient
+      tags:
+        - Recipes
+      parameters:
+        - name: ingredient
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Ingredient name to search
+      responses:
+        '200':
+          description: List of matching recipes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipe'
+        '400':
+          description: Missing ingredient parameter
+
+  /recipes/{id}:
+    get:
+      summary: Get a specific recipe by ID
+      tags:
+        - Recipes
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Recipe ID
+        - name: servings
+          in: query
+          schema:
+            type: integer
+            default: 4
+          description: Number of servings (for ingredient adjustment)
+      responses:
+        '200':
+          description: Recipe details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+        '404':
+          description: Recipe not found
+
+  /recipes/{id}/portions:
+    post:
+      summary: Calculate ingredient quantities for different servings
+      tags:
+        - Recipes
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                servings:
+                  type: integer
+                  minimum: 1
+              required:
+                - servings
+      responses:
+        '200':
+          description: Adjusted recipe
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+
+components:
+  schemas:
+    Recipe:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        region:
+          type: string
+        origin:
+          type: string
+        description:
+          type: string
+        photoUrl:
+          type: string
+          format: uri
+        videoUrl:
+          type: string
+          format: uri
+        portions:
+          type: integer
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ingredient'
+        steps:
+          type: array
+          items:
+            type: string
+      example:
+        id: 1
+        name: Eru
+        region: Sud-Ouest
+        origin: Plat traditionnel des peuplements Bamiléké
+        description: Eru est un plat riche servi avec water-fufu
+        photoUrl: https://example.com/eru.jpg
+        videoUrl: https://youtube.com/watch?v=...
+        portions: 4
+        ingredients:
+          - name: Feuilles d'Eru
+            quantity: '500 g'
+          - name: Poisson fumé
+            quantity: '200 g'
+        steps:
+          - Nettoyer les feuilles
+          - Faire revenir le poisson
+          - Ajouter les feuilles et cuire
+
+    Ingredient:
+      type: object
+      properties:
+        name:
+          type: string
+        quantity:
+          type: string
+      required:
+        - name
+        - quantity

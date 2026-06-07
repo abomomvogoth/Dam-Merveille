@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tastecam-backend
+spec:
+  selector:
+    app: tastecam-backend
+  ports:
+    - name: http
+      port: 4000
+      targetPort: 4000
+  type: ClusterIP
+

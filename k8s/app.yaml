@@ -1,0 +1,6 @@
+# Apply in this order:
+# 1) secrets.yaml
+# 2) postgres.yaml
+# 3) backend-deployment.yaml + backend-service.yaml
+# 4) frontend-deployment.yaml + frontend-service.yaml
+
