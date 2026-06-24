@@ -1,0 +1,85 @@
+---
+- name: Deploy TasteCam Heritage application
+  hosts: all
+  become: yes
+  vars:
+    app_directory: /opt/tastecam-heritage
+    repo_url: "https://github.com/abomomvogoth/Dam-Merveille.git"
+    app_port: 4000
+
+  tasks:
+    - name: Ensure app directory exists
+      file:
+        path: "{{ app_directory }}"
+        state: directory
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: '0755'
+
+    - name: Clone or pull latest repository
+      git:
+        repo: "{{ repo_url }}"
+        dest: "{{ app_directory }}"
+        force: yes
+        update: yes
+
+    - name: Install backend dependencies
+      npm:
+        path: "{{ app_directory }}/backend"
+        state: present
+      become_user: "{{ ansible_user }}"
+
+    - name: Install frontend dependencies
+      npm:
+        path: "{{ app_directory }}/frontend"
+        state: present
+      become_user: "{{ ansible_user }}"
+
+    - name: Build frontend
+      command: npm run build
+      args:
+        chdir: "{{ app_directory }}/frontend"
+      become_user: "{{ ansible_user }}"
+
+    - name: Create .env file for backend
+      copy:
+        dest: "{{ app_directory }}/backend/.env"
+        content: |
+          PORT=4000
+          DATABASE_URL=postgresql://tastecam:tastecam@localhost:5432/tastecam
+          NODE_ENV=production
+        mode: '0644'
+
+    - name: Stop existing PM2 application
+      command: pm2 delete tastecam-backend
+      ignore_errors: yes
+      become_user: "{{ ansible_user }}"
+
+    - name: Start backend with PM2
+      command: pm2 start {{ app_directory }}/backend/src/server.js --name tastecam-backend --watch
+      become_user: "{{ ansible_user }}"
+
+    - name: Save PM2 process list
+      command: pm2 save
+      become_user: "{{ ansible_user }}"
+
+    - name: Setup PM2 to start on boot
+      command: pm2 startup systemd -u {{ ansible_user }} --hp /home/{{ ansible_user }}
+      become_user: "{{ ansible_user }}"
+
+    - name: Verify application is running
+      uri:
+        url: "http://localhost:{{ app_port }}/api/health"
+        return_content: yes
+      register: health_check
+      retries: 5
+      delay: 3
+      until: health_check.status == 200
+
+    - name: Display deployment status
+      debug:
+        msg:
+          - "Application deployed successfully!"
+          - "Backend API: http://localhost:{{ app_port }}/api/health"
+          - "Swagger Docs: http://localhost:{{ app_port }}/api/docs"
+          - "PM2 status: running"

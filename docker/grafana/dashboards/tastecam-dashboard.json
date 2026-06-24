@@ -1,0 +1,59 @@
+{
+  "dashboard": {
+    "title": "TasteCam Heritage - Application Monitoring",
+    "description": "Dashboard for monitoring TasteCam Heritage API performance and health",
+    "timezone": "browser",
+    "panels": [
+      {
+        "title": "API Health",
+        "type": "stat",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "up{job='tastecam-backend'}",
+            "legendFormat": "Backend Status"
+          }
+        ],
+        "gridPos": {"h": 4, "w": 4, "x": 0, "y": 0}
+      },
+      {
+        "title": "HTTP Requests Rate",
+        "type": "graph",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total{job='tastecam-backend'}[5m])",
+            "legendFormat": "Requests/sec"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 8, "x": 0, "y": 4}
+      },
+      {
+        "title": "Request Duration (P95)",
+        "type": "graph",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job='tastecam-backend'}[5m]))",
+            "legendFormat": "P95"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 8, "x": 8, "y": 4}
+      },
+      {
+        "title": "Active Recipes in Database",
+        "type": "stat",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "tastecam_recipes_total",
+            "legendFormat": "Total Recipes"
+          }
+        ],
+        "gridPos": {"h": 4, "w": 4, "x": 4, "y": 0}
+      }
+    ],
+    "tags": ["tastecam", "african-cuisine", "monitoring"],
+    "version": 1
+  }
+}

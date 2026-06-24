@@ -1,0 +1,77 @@
+---
+- name: Install required packages for TasteCam Heritage
+  hosts: all
+  become: yes
+  vars:
+    node_version: "20.x"
+    packages:
+      - curl
+      - git
+      - apt-transport-https
+      - ca-certificates
+      - software-properties-common
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install system packages
+      apt:
+        name: "{{ packages }}"
+        state: present
+
+    - name: Add Node.js repository
+      shell: |
+        curl -fsSL https://deb.nodesource.com/setup_{{ node_version }} | bash -
+      args:
+        creates: /etc/apt/sources.list.d/nodesource.list
+
+    - name: Install Node.js
+      apt:
+        name: nodejs
+        state: present
+
+    - name: Install PM2 globally (process manager)
+      npm:
+        name: pm2
+        global: yes
+        state: present
+
+    - name: Install Docker prerequisites
+      apt:
+        name:
+          - docker.io
+          - docker-compose-plugin
+        state: present
+
+    - name: Start and enable Docker
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Add user to docker group
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
+
+    - name: Verify installations
+      command: "{{ item }}"
+      register: result
+      changed_when: false
+      loop:
+        - node --version
+        - npm --version
+        - docker --version
+        - docker compose version
+
+    - name: Display installation versions
+      debug:
+        msg:
+          - "Node.js: {{ result.results[0].stdout }}"
+          - "npm: {{ result.results[1].stdout }}"
+          - "Docker: {{ result.results[2].stdout }}"
+          - "Docker Compose: {{ result.results[3].stdout }}"

@@ -10,13 +10,24 @@ function App() {
 
   const t = useCallback((key) => getTranslation(language, key), [language]);
 
+  const r = useCallback((recipe, field) => {
+    // Return bilingual field, e.g. name → nameEn when language='en'
+    const langSuffix = language === 'en' ? 'En' : '';
+    const val = recipe[field + langSuffix];
+    return val || recipe[field] || '';
+  }, [language]);
+
   const filtered = useMemo(() => {
     const lower = query.toLowerCase();
-    return recipes.filter((recipe) =>
-      recipe.ingredients.some((ingredient) => ingredient.name.toLowerCase().includes(lower)) ||
-      recipe.name.toLowerCase().includes(lower) ||
-      recipe.region.toLowerCase().includes(lower)
-    );
+    return recipes.filter((recipe) => {
+      const searchName = (recipe.name + ' ' + (recipe.nameEn || '')).toLowerCase();
+      const searchRegion = (recipe.region + ' ' + (recipe.regionEn || '')).toLowerCase();
+      return searchName.includes(lower) ||
+        searchRegion.includes(lower) ||
+        recipe.ingredients.some((ing) =>
+          (ing.name + ' ' + (ing.nameEn || '')).toLowerCase().includes(lower)
+        );
+    });
   }, [query]);
 
   const adjustedRecipe = useMemo(() => {
@@ -30,6 +41,15 @@ function App() {
       })),
     };
   }, [selected, portions]);
+
+  const displayName = useCallback((recipe) => r(recipe, 'name'), [r]);
+  const displayRegion = useCallback((recipe) => r(recipe, 'region'), [r]);
+  const displayOrigin = useCallback((recipe) => r(recipe, 'origin'), [r]);
+  const displayDescription = useCallback((recipe) => r(recipe, 'description'), [r]);
+  const displayIngredientName = useCallback((ing) => {
+    if (language === 'en' && ing.nameEn) return ing.nameEn;
+    return ing.name;
+  }, [language]);
 
   return (
     <div className="app-shell">
@@ -53,6 +73,9 @@ function App() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
+        <div className="search-info">
+          {filtered.length} {t('list.title')} ({recipes.length} {t('list.total')})
+        </div>
       </section>
 
       <main className="content-grid">
@@ -63,11 +86,12 @@ function App() {
           ) : (
             <ul>
               {filtered.map((recipe) => (
-                <li key={recipe.id} onClick={() => { setSelected(recipe); setPortions(recipe.portions); }}>
-                  <img src={recipe.photoUrl} alt={recipe.name} />
+                <li key={recipe.id} onClick={() => { setSelected(recipe); setPortions(recipe.portions); }} className={selected?.id === recipe.id ? 'active' : ''}>
+                  <img src={recipe.photoUrl} alt={displayName(recipe)} />
                   <div>
-                    <strong>{recipe.name}</strong>
-                    <span>{recipe.region}</span>
+                    <strong>{displayName(recipe)}</strong>
+                    <span className="region-badge">{displayRegion(recipe)}</span>
+                    <span className="category-badge">{r(recipe, 'category')}</span>
                   </div>
                 </li>
               ))}
@@ -78,11 +102,17 @@ function App() {
         <div className="recipe-detail">
           {adjustedRecipe ? (
             <article>
-              <h2>{adjustedRecipe.name}</h2>
-              <p className="origin">{t('detail.origin')}: {adjustedRecipe.origin}</p>
-              <p>{adjustedRecipe.description}</p>
+              <div className="detail-header">
+                <img src={adjustedRecipe.photoUrl} alt={displayName(adjustedRecipe)} className="detail-image" />
+                <div>
+                  <h2>{displayName(adjustedRecipe)}</h2>
+                  <span className="region-badge">{displayRegion(adjustedRecipe)}</span>
+                  <span className="category-badge">{r(adjustedRecipe, 'category')}</span>
+                </div>
+              </div>
+              <p className="origin">{t('detail.origin')}: {displayOrigin(adjustedRecipe)}</p>
+              <p className="description">{displayDescription(adjustedRecipe)}</p>
               <div className="metadata">
-                <span>{t('detail.region')}: {adjustedRecipe.region}</span>
                 <div>
                   <label>{t('detail.portions')}:</label>
                   <input
@@ -94,23 +124,28 @@ function App() {
                 </div>
               </div>
               <h3>{t('detail.ingredients')}</h3>
-              <ul>
+              <ul className="ingredient-list">
                 {adjustedRecipe.ingredients.map((item, index) => (
-                  <li key={index}>{item.quantity} - {item.name}</li>
+                  <li key={index}>
+                    <span className="qty">{item.quantity}</span>
+                    <span className="sep">—</span>
+                    <span className="name">{displayIngredientName(item)}</span>
+                  </li>
                 ))}
               </ul>
               <h3>{t('detail.steps')}</h3>
-              <ol>
-                {adjustedRecipe.steps.map((step, index) => (
+              <ol className="steps-list">
+                {(language === 'en' && adjustedRecipe.stepsEn ? adjustedRecipe.stepsEn : adjustedRecipe.steps).map((step, index) => (
                   <li key={index}>{step}</li>
                 ))}
               </ol>
-              <p>
-                <a href={adjustedRecipe.videoUrl} target="_blank" rel="noreferrer">{t('detail.video')}</a>
+              <p className="video-link">
+                <a href={adjustedRecipe.videoUrl} target="_blank" rel="noreferrer">▶ {t('detail.video')}</a>
               </p>
             </article>
           ) : (
             <div className="empty-state">
+              <div className="empty-icon">🍲</div>
               <p>{t('detail.empty')}</p>
             </div>
           )}

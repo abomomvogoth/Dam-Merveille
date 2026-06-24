@@ -1,8 +1,9 @@
 export const translations = {
   fr: {
-    'header.subtitle': 'Recettes traditionnelles du Nord-Ouest et du Sud-Ouest du Cameroun.',
+    'header.subtitle': 'Recettes traditionnelles du Cameroun et d\'Afrique — préservez la richesse culinaire de nos cultures.',
     'search.placeholder': 'Rechercher par ingrédient, plat ou région',
-    'list.title': 'Recettes',
+    'list.title': 'recettes',
+    'list.total': 'au total',
     'list.empty': 'Aucune recette trouvée.',
     'detail.origin': 'Origine',
     'detail.region': 'Région',
@@ -13,9 +14,10 @@ export const translations = {
     'detail.empty': 'Sélectionne une recette pour voir les détails.',
   },
   en: {
-    'header.subtitle': 'Traditional recipes from the Northwest and Southwest regions of Cameroon.',
+    'header.subtitle': 'Traditional Cameroonian and African recipes — preserving the culinary richness of our cultures.',
     'search.placeholder': 'Search by ingredient, dish or region',
-    'list.title': 'Recipes',
+    'list.title': 'recipes',
+    'list.total': 'total',
     'list.empty': 'No recipes found.',
     'detail.origin': 'Origin',
     'detail.region': 'Region',
