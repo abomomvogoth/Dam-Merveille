@@ -312,9 +312,75 @@ services:
 
 ---
 
+## 12. Évaluation Architecturale Formelle (ATAM)
+
+Cette section applique la méthode **ATAM (Architecture Trade-off Analysis Method)** pour évaluer formellement l'architecture de TasteCam Heritage contre les objectifs du projet.
+
+### 12.1 Scénarios d'attributs de qualité
+
+| ID | Scénario | Attribut | Stimulus | Réponse | Mesure |
+|----|----------|----------|----------|---------|--------|
+| QA-1 | Scaling de requêtes | Scalabilité | 1000 utilisateurs simultanés | Scale de 2 à 10 pods backend | Temps réponse < 500ms |
+| QA-2 | Panne d'un pod | Disponibilité | Pod backend crash | Redémarrage automatique + re-routage | Downtime < 30s |
+| QA-3 | Recherche multi-langue | Performance | Recherche par ingrédient en anglais | Cache Redis + indexation | Réponse < 200ms |
+| QA-4 | Déploiement zero-downtime | Maintenabilité | Nouvelle version déployée | RollingUpdate sans interruption | 0 downtime |
+| QA-5 | Fuite de données | Sécurité | Attaque injection SQL | ORM paramétré + validation | Bloqué à la couche données |
+| QA-6 | Ajout d'une recette | Testabilité | Nouveau endpoint ajouté | Tests automatisés Jest | Coverage > 80% |
+
+### 12.2 Sensibilités et trade-offs identifiés
+
+| Décision | Sensibilité | Trade-off | Mitigation |
+|----------|-------------|-----------|------------|
+| Monolithe layered | La scalabilité est limitée par la plus faible couche | Simplicité vs Scalabilité fine | Architecture microservices-ready pour Phase 2 |
+| K8s multi-pods | La complexité opérationnelle augmente | Résilience vs Coût opérationnel | HPA + RollingUpdate automatisés |
+| Cache Redis (prévu) | La cohérence des données diffère | Performance vs Fraîcheur des données | Cache TTL court (60s) |
+| JWT Auth (prévu) | La latence d'authentification | Sécurité vs Performance | Token refresh + cache de validation |
+| PostgreSQL unique | Point unique de défaillance | Simplicité vs Haute disponibilité | Backup automatisé + read replicas (futur) |
+
+### 12.3 Points de risque et non-risques
+
+**Risques :**
+- ⚠️ **R1** : Utilisation de PostgreSQL comme SPOF — si la base tombe, toute l'application est indisponible
+- ⚠️ **R2** : Pas de cache implémenté (Redis prévu mais pas encore déployé)
+- ⚠️ **R3** : Pas d'authentification utilisateur (sécurité limitée)
+
+**Non-risques :**
+- ✅ **NR1** : La couverture de tests (94.28%) assure une bonne non-régression
+- ✅ **NR2** : La stratégie RollingUpdate garantit des déploiements sans interruption
+- ✅ **NR3** : Les health probes Kubernetes assurent le routage vers les pods sains uniquement
+- ✅ **NR4** : Le monitoring Prometheus/Grafana permet une détection rapide des anomalies
+
+### 12.4 ADD Process (Attribute-Driven Design) — Steps Applied
+
+| Step | Action | Artefact |
+|------|--------|----------|
+| 1 | Définir les objectifs architecturaux | `docs/PROJECT_REPORT.md` Ch1 |
+| 2 | Décomposer le système en éléments | `docs/ARCHITECTURE.md` Sec 3 |
+| 3 | Affecter les responsabilités aux éléments | Controller → routes, Service → logique métier, Model → données |
+| 4 | Définir les interfaces | OpenAPI 3.0 (`docs/api-swagger.yaml`) |
+| 5 | Choisir et appliquer les patterns architecturaux | Layered + MVC (Section 7) |
+| 6 | Évaluer contre les scénarios | ATAM Scenarios (Section 12.1) |
+| 7 | Itérer et raffiner | Sprint Retrospectives (`docs/scrum-backlog.md`) |
+
+### 12.5 Résumé de l'évaluation
+
+| Attribut | Priorité | Score | Justification |
+|----------|:--------:|:-----:|---------------|
+| **Scalabilité** | Haute | ⭐⭐⭐⭐ | HPA K8s + services stateless |
+| **Disponibilité** | Haute | ⭐⭐⭐⭐ | RollingUpdate + health probes + multi-pods |
+| **Performance** | Haute | ⭐⭐⭐⭐ | API < 50ms, cache-ready |
+| **Sécurité** | Moyenne | ⭐⭐⭐ | CORS + validation, JWT prévu |
+| **Maintenabilité** | Haute | ⭐⭐⭐⭐⭐ | Code modulaire + tests + Swagger |
+| **Testabilité** | Haute | ⭐⭐⭐⭐⭐ | 94.28% coverage + API testable |
+| **Interopérabilité** | Moyenne | ⭐⭐⭐⭐ | REST API standard, OpenAPI documenté |
+
+**Score global ATAM : 4.1/5** — L'architecture est solide pour un MVP et répond aux exigences du cours SEN3244.
+
+---
+
 ## Conclusion
 
-TasteCam Heritage combine une architecture monolithique simple pour le MVP avec la scalabilité en microservices. Cette approche permet un démarrage rapide tout en restant extensible pour les besoins futurs.
+TasteCam Heritage combine une architecture monolithique simple pour le MVP avec la scalabilité en microservices. Cette approche permet un démarrage rapide tout en restant extensible pour les besoins futurs. L'évaluation ATAM confirme que l'architecture répond aux objectifs de qualité avec un score global de 4.1/5.
 
 **État actuel** : Monolithe layered simple (React + Express + PostgreSQL)
 **Phase 2** : Extraction de services (Auth, Recommendations)

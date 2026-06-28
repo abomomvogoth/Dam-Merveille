@@ -1,59 +1,69 @@
-// TasteCam Heritage - Metrics middleware for Prometheus
-// Exposes key application metrics at GET /api/metrics
+// TasteCam Heritage - Production Metrics Middleware for Prometheus
+// Uses prom-client library for proper Prometheus metric types
+
+const promClient = require('prom-client');
+
+// Create a Registry
+const register = new promClient.Registry();
+
+// Default metrics (CPU, memory, etc.)
+promClient.collectDefaultMetrics({ register, prefix: 'tastecam_' });
+
+// Custom metrics
+const httpRequestCounter = new promClient.Counter({
+  name: 'tastecam_http_requests_total',
+  help: 'Total HTTP requests received',
+  labelNames: ['method', 'route', 'status'],
+  registers: [register],
+});
+
+const httpRequestDurationHistogram = new promClient.Histogram({
+  name: 'tastecam_http_request_duration_seconds',
+  help: 'HTTP request duration in seconds',
+  labelNames: ['method', 'route', 'status'],
+  buckets: [0.01, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5],
+  registers: [register],
+});
+
+const recipesGauge = new promClient.Gauge({
+  name: 'tastecam_recipes_total',
+  help: 'Total number of recipes in the database',
+  registers: [register],
+});
+
+const appInfo = new promClient.Gauge({
+  name: 'tastecam_info',
+  help: 'Application metadata',
+  labelNames: ['version', 'service', 'language'],
+  registers: [register],
+});
+
+// Initialize static metrics
+appInfo.set(1);
 
 const recipes = require('./data/sampleRecipes.json');
+recipesGauge.set(recipes.length);
 
-// In-memory counters (in production, use prom-client library)
-let requestCount = 0;
-const requestDurationBuckets = {};
-const startTime = Date.now();
-
+// Middleware: track every request
 function metricsMiddleware(req, res, next) {
-  const start = Date.now();
-  
-  res.on('finish', () => {
-    requestCount++;
-    const duration = Date.now() - start;
-    const bucket = Math.floor(duration / 50) * 50; // 50ms buckets
-    requestDurationBuckets[bucket] = (requestDurationBuckets[bucket] || 0) + 1;
-  });
-  
+  const end = httpRequestDurationHistogram.startTimer();
+  const originalEnd = res.end;
+
+  res.end = function (...args) {
+    const route = req.route ? req.route.path : req.path;
+    const status = res.statusCode.toString();
+    httpRequestCounter.inc({ method: req.method, route, status });
+    end({ method: req.method, route, status });
+    originalEnd.apply(res, args);
+  };
+
   next();
 }
 
-function metricsHandler(req, res) {
-  const uptime = Math.floor((Date.now() - startTime) / 1000);
-  
-  const metrics = [
-    '# HELP tastecam_uptime_seconds Application uptime',
-    '# TYPE tastecam_uptime_seconds gauge',
-    `tastecam_uptime_seconds ${uptime}`,
-    '',
-    '# HELP tastecam_http_requests_total Total HTTP requests',
-    '# TYPE tastecam_http_requests_total counter',
-    `tastecam_http_requests_total ${requestCount}`,
-    '',
-    '# HELP tastecam_recipes_total Total recipes in database',
-    '# TYPE tastecam_recipes_total gauge',
-    `tastecam_recipes_total ${recipes.length}`,
-    '',
-    '# HELP tastecam_up Application status (1 = up)',
-    '# TYPE tastecam_up gauge',
-    'tastecam_up 1',
-    '',
-    '# HELP tastecam_request_duration_ms Request duration histogram buckets',
-    '# TYPE tastecam_request_duration_ms gauge',
-    ...Object.entries(requestDurationBuckets).map(
-      ([bucket, count]) => `tastecam_request_duration_ms_bucket{le="${bucket}ms"} ${count}`
-    ),
-    '',
-    '# HELP tastecam_info Application metadata',
-    '# TYPE tastecam_info gauge',
-    `tastecam_info{version="1.0.0",service="TasteCam Heritage API"} 1`,
-  ].join('\n');
-  
-  res.set('Content-Type', 'text/plain; charset=utf-8');
-  res.status(200).send(metrics);
+// Handler: expose metrics
+async function metricsHandler(req, res) {
+  res.set('Content-Type', register.contentType);
+  res.end(await register.metrics());
 }
 
-module.exports = { metricsMiddleware, metricsHandler };
+module.exports = { metricsMiddleware, metricsHandler, register };
