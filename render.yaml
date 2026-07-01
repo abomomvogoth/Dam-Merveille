@@ -1,34 +1,27 @@
 # Render Blueprint — Deploy TasteCam Heritage
 # https://render.com/docs/blueprint-spec
+#
+# Single web service: Express API + built frontend static files.
+# 1. Build: install backend deps + build frontend
+# 2. Start: Node.js serves Express API + serves frontend from dist/
+# Uses SERVE_STATIC=true flag in server.js
 
 services:
-  # Backend API
   - type: web
-    name: tastecam-backend
-    env: node
+    name: tastecam-heritage
+    runtime: node
     region: frankfurt
     plan: free
-    buildCommand: cd backend && npm install
-    startCommand: cd backend && node src/server.js
+    buildCommand: cd backend && npm install && cd ../frontend && npm install && npm run build
+    startCommand: node backend/src/server.js
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: "4000"
-      - key: DATABASE_URL
-        value: postgresql://tastecam:tastecam@localhost:5432/tastecam
+      - key: SERVE_STATIC
+        value: "true"
     healthCheckPath: /api/health
     autoDeploy: true
-
-  # Frontend (static site)
-  - type: web
-    name: tastecam-frontend
-    env: static
-    region: frankfurt
-    plan: free
-    buildCommand: cd frontend && npm install && npm run build
-    staticPublishPath: frontend/dist
-    envVars:
-      - key: VITE_API_URL
-        value: https://tastecam-backend.onrender.com/api
-    autoDeploy: true
+    domains:
+      - tastecam-heritage.onrender.com
