@@ -1,264 +1,269 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" font-family="Segoe UI, system-ui, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1050" font-family="Segoe UI, system-ui, sans-serif">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#fdf8f0;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#f8e8d0;stop-opacity:1"/>
+      <stop offset="0%" stop-color="#fdf8f0"/>
+      <stop offset="100%" stop-color="#f8e8d0"/>
     </linearGradient>
-    <linearGradient id="be-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#2563eb;stop-opacity:1"/>
+    <linearGradient id="fe-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
     </linearGradient>
-    <linearGradient id="fe-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#059669;stop-opacity:1"/>
+    <linearGradient id="be-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#2563eb"/>
     </linearGradient>
-    <linearGradient id="db-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#4f46e5;stop-opacity:1"/>
+    <linearGradient id="db-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
     </linearGradient>
-    <linearGradient id="monitor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#d4532a;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#b8431e;stop-opacity:1"/>
+    <linearGradient id="mon-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#dc2626"/>
     </linearGradient>
-    <linearGradient id="cicd-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0f172a;stop-opacity:0.85"/>
-      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:0.85"/>
+    <linearGradient id="cicd-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
     </linearGradient>
-    <style>
-      .box { fill: #fff; stroke: #2d1f0e; stroke-width: 2.5; rx: 12; ry: 12; }
-      .box-sm { fill: #fff; stroke: #2d1f0e; stroke-width: 2; rx: 8; ry: 8; }
-      .box-developer { fill: #fef0e5; stroke: #d4532a; stroke-width: 2; rx: 10; ry: 10; }
-      .text-title { font-size: 22px; font-weight: 800; fill: #2d1f0e; }
-      .text-subtitle { font-size: 13px; fill: #5c3d2e; }
-      .text-label { font-size: 13px; font-weight: 700; fill: #2d1f0e; }
-      .text-small { font-size: 10px; fill: #6b5a4a; }
-      .text-white { fill: #fff; font-weight: 700; }
-      .arrow { stroke: #5c3d2e; stroke-width: 2; fill: none; }
-      .arrow-dashed { stroke: #8b7a6a; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
-      .badge { fill: #e8f5e0; stroke: #4a7c3f; stroke-width: 1; rx: 4; ry: 4; }
-      .badge-text { font-size: 9px; font-weight: 700; fill: #4a7c3f; }
-      .icon { font-size: 24px; }
-    </style>
+    <linearGradient id="k8s-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,1 L9,5 L0,9" fill="#475569"/>
+    </marker>
+    <marker id="arrow-dash" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,1 L9,5 L0,9" fill="#94a3b8"/>
+    </marker>
   </defs>
 
   <!-- Background -->
-  <rect width="1200" height="900" fill="url(#bg)" rx="16"/>
+  <rect width="1400" height="1050" fill="url(#bg)" rx="16"/>
 
   <!-- Title -->
-  <text x="600" y="40" text-anchor="middle" class="text-title">TasteCam Heritage — Architecture Diagram</text>
-  <text x="600" y="62" text-anchor="middle" class="text-subtitle">SEN3244 Software Architecture — Spring 2026</text>
+  <text x="700" y="45" text-anchor="middle" font-size="26" font-weight="800" fill="#1e293b">TasteCam Heritage — Architecture Diagram</text>
+  <text x="700" y="68" text-anchor="middle" font-size="14" fill="#64748b">SEN3244 Software Architecture — Full-Stack DevOps Pipeline</text>
 
-  <!-- ==================== LAYER 1: USERS ==================== -->
-  <text x="60" y="95" class="text-label">LAYER 1 : USERS</text>
-  <line x1="60" y1="100" x2="1140" y2="100" stroke="#e8d5c0" stroke-width="1"/>
+  <!-- ================= LAYER 1: USERS ================= -->
+  <rect x="40" y="85" width="1320" height="90" fill="none" stroke="#d4c4b0" stroke-width="1.5" rx="12"/>
+  <rect x="50" y="90" width="180" height="24" rx="6" fill="#475569"/>
+  <text x="140" y="107" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">CLIENTS (L1)</text>
 
-  <!-- User Icon -->
-  <rect x="30" y="108" width="100" height="70" class="box-developer"/>
-  <text x="80" y="140" text-anchor="middle" class="text-label">🌐</text>
-  <text x="80" y="160" text-anchor="middle" class="text-small">End Users</text>
+  <!-- Users -->
+  <rect x="80" y="120" width="120" height="45" rx="10" fill="#fef0e5" stroke="#d4532a" stroke-width="2" filter="url(#shadow)"/>
+  <text x="140" y="140" text-anchor="middle" font-size="12" font-weight="700" fill="#d4532a">Web Browser</text>
+  <text x="140" y="156" text-anchor="middle" font-size="10" fill="#5c3d2e">Chrome / Firefox / Safari</text>
 
-  <!-- HTTPS Arrow -->
-  <line x1="130" y1="145" x2="180" y2="145" class="arrow"/>
-  <polygon points="180,140 190,145 180,150" fill="#5c3d2e"/>
+  <line x1="200" y1="142" x2="260" y2="142" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
 
-  <!-- ==================== LAYER 2: LOAD BALANCER ==================== -->
-  <text x="60" y="210" class="text-label">LAYER 2 : LOAD BALANCER & INGRESS</text>
-  <line x1="60" y1="215" x2="1140" y2="215" stroke="#e8d5c0" stroke-width="1"/>
+  <!-- ================= LAYER 2: INGRESS ================= -->
+  <rect x="40" y="185" width="1320" height="80" fill="none" stroke="#d4c4b0" stroke-width="1.5" rx="12"/>
+  <rect x="50" y="190" width="200" height="24" rx="6" fill="#475569"/>
+  <text x="150" y="207" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">LOAD BALANCER (L2)</text>
 
-  <!-- NGINX / Ingress Controller -->
-  <rect x="180" y="220" width="200" height="70" class="box"/>
-  <rect x="180" y="220" width="200" height="26" fill="#c67b4b" rx="8" ry="8"/>
-  <text x="280" y="238" text-anchor="middle" class="text-white" font-size="12">NGINX Ingress Controller</text>
-  <text x="280" y="260" text-anchor="middle" class="text-small">Load Balancer / Reverse Proxy</text>
-  <text x="280" y="275" text-anchor="middle" class="text-small">SSL Termination</text>
+  <rect x="260" y="220" width="180" height="35" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" filter="url(#shadow)"/>
+  <text x="350" y="242" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">NGINX Ingress Controller</text>
 
-  <!-- Arrows to Frontend & Backend -->
-  <line x1="280" y1="290" x2="280" y2="330" class="arrow"/>
-  <polygon points="275,330 280,340 285,330" fill="#5c3d2e"/>
+  <!-- Split arrows from Ingress -->
+  <line x1="440" y1="237" x2="510" y2="237" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="440" y1="237" x2="510" y2="330" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
 
-  <line x1="490" y1="290" x2="490" y2="330" class="arrow"/>
-  <polygon points="485,330 490,340 495,330" fill="#5c3d2e"/>
+  <!-- Labels -->
+  <text x="475" y="230" text-anchor="middle" font-size="10" fill="#475569">/</text>
+  <text x="475" y="295" text-anchor="middle" font-size="10" fill="#475569">/api</text>
 
-  <!-- ==================== LAYER 3: FRONTEND & BACKEND ==================== -->
-  <text x="60" y="355" class="text-label">LAYER 3 : APPLICATION (Kubernetes Cluster)</text>
-  <line x1="60" y1="360" x2="1140" y2="360" stroke="#e8d5c0" stroke-width="1"/>
-
-  <!-- Kubernetes Cluster Box -->
-  <rect x="150" y="365" width="600" height="200" fill="none" stroke="#5c3d2e" stroke-width="2" rx="16" stroke-dasharray="8 4"/>
-  <rect x="160" y="370" width="120" height="20" fill="#fdf8f0"/>
-  <text x="220" y="385" text-anchor="middle" class="text-small" font-weight="700">Kubernetes Cluster</text>
+  <!-- ================= LAYER 3: APPLICATION ================= -->
+  <rect x="40" y="275" width="920" height="250" fill="none" stroke="#d4c4b0" stroke-width="1.5" rx="12"/>
+  <rect x="50" y="280" width="240" height="24" rx="6" fill="#475569"/>
+  <text x="170" y="297" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">APPLICATION (L3) — Kubernetes Cluster</text>
 
   <!-- Frontend Pods -->
-  <rect x="175" y="395" width="180" height="70" fill="url(#fe-gradient)" rx="10" ry="10"/>
-  <text x="265" y="420" text-anchor="middle" class="text-white" font-size="13">Frontend (React)</text>
-  <text x="265" y="438" text-anchor="middle" class="text-white" font-size="10" opacity="0.85">2–8 Replicas (HPA)</text>
-  <text x="265" y="453" text-anchor="middle" class="text-white" font-size="10" opacity="0.85">Port 3000</text>
+  <rect x="510" y="310" width="200" height="95" rx="12" fill="url(#fe-grad)" filter="url(#shadow)"/>
+  <text x="610" y="338" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">Frontend</text>
+  <text x="610" y="356" text-anchor="middle" font-size="11" fill="#d1fae5">React 18 + Vite</text>
+  <text x="610" y="372" text-anchor="middle" font-size="10" fill="#a7f3d0">2–8 replicas (HPA)</text>
+  <text x="610" y="388" text-anchor="middle" font-size="10" fill="#a7f3d0">Port 80</text>
 
   <!-- Backend Pods -->
-  <rect x="420" y="395" width="180" height="70" fill="url(#be-gradient)" rx="10" ry="10"/>
-  <text x="510" y="420" text-anchor="middle" class="text-white" font-size="13">Backend (Express)</text>
-  <text x="510" y="438" text-anchor="middle" class="text-white" font-size="10" opacity="0.85">2–10 Replicas (HPA)</text>
-  <text x="510" y="453" text-anchor="middle" class="text-white" font-size="10" opacity="0.85">Port 4000</text>
+  <rect x="510" y="415" width="200" height="95" rx="12" fill="url(#be-grad)" filter="url(#shadow)"/>
+  <text x="610" y="443" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">Backend API</text>
+  <text x="610" y="461" text-anchor="middle" font-size="11" fill="#bfdbfe">Node.js + Express</text>
+  <text x="610" y="477" text-anchor="middle" font-size="10" fill="#93c5fd">2–10 replicas (HPA)</text>
+  <text x="610" y="493" text-anchor="middle" font-size="10" fill="#93c5fd">Port 4000</text>
 
-  <!-- RollingUpdate badges -->
-  <rect x="175" y="472" width="180" height="16" class="badge"/>
-  <text x="265" y="484" text-anchor="middle" class="badge-text">RollingUpdate — maxUnavailable=0</text>
+  <!-- Frontend Service + Backend Service -->
+  <rect x="740" y="325" width="100" height="28" rx="6" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/>
+  <text x="790" y="344" text-anchor="middle" font-size="10" font-weight="700" fill="#059669">ClusterIP</text>
 
-  <rect x="420" y="472" width="180" height="16" class="badge"/>
-  <text x="510" y="484" text-anchor="middle" class="badge-text">Health Probes / Readiness + Liveness</text>
+  <rect x="740" y="430" width="100" height="28" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="790" y="449" text-anchor="middle" font-size="10" font-weight="700" fill="#2563eb">ClusterIP</text>
 
-  <!-- Replica icons -->
-  <circle cx="230" cy="500" r="4" fill="#10b981" opacity="0.5"/>
-  <circle cx="250" cy="500" r="4" fill="#10b981" opacity="0.5"/>
-  <circle cx="270" cy="500" r="4" fill="#10b981" opacity="0.5"/>
+  <!-- FE ↔ BE arrow -->
+  <line x1="610" y1="405" x2="610" y2="415" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="640" y="412" font-size="10" fill="#475569">REST</text>
 
-  <circle cx="475" cy="500" r="4" fill="#3b82f6" opacity="0.5"/>
-  <circle cx="495" cy="500" r="4" fill="#3b82f6" opacity="0.5"/>
-  <circle cx="515" cy="500" r="4" fill="#3b82f6" opacity="0.5"/>
+  <!-- Health probes badges -->
+  <rect x="460" y="315" width="36" height="18" rx="4" fill="#f0fdf4" stroke="#22c55e" stroke-width="1"/>
+  <text x="478" y="328" text-anchor="middle" font-size="8" font-weight="700" fill="#16a34a">LIVE</text>
+  <rect x="460" y="335" width="36" height="18" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+  <text x="478" y="348" text-anchor="middle" font-size="8" font-weight="700" fill="#d97706">READY</text>
 
-  <!-- Frontend ↔ Backend arrow -->
-  <line x1="355" y1="430" x2="420" y2="430" class="arrow"/>
-  <polygon points="415,425 425,430 415,435" fill="#5c3d2e"/>
-  <text x="387" y="420" text-anchor="middle" class="text-small">API / REST</text>
+  <!-- RollingUpdate badge -->
+  <rect x="510" y="515" width="200" height="18" rx="6" fill="#f0fdf4" stroke="#22c55e" stroke-width="1"/>
+  <text x="610" y="528" text-anchor="middle" font-size="9" font-weight="700" fill="#16a34a">RollingUpdate — maxUnavailable=0</text>
 
-  <!-- Services -->
-  <rect x="175" y="520" width="80" height="20" fill="#e8d5c0" rx="6" ry="6"/>
-  <text x="215" y="534" text-anchor="middle" class="text-small" font-weight="600">Service</text>
-  <rect x="420" y="520" width="80" height="20" fill="#e8d5c0" rx="6" ry="6"/>
-  <text x="460" y="534" text-anchor="middle" class="text-small" font-weight="600">Service</text>
+  <!-- ================= LAYER 4: DATABASE ================= -->
+  <rect x="40" y="535" width="920" height="90" fill="none" stroke="#d4c4b0" stroke-width="1.5" rx="12"/>
+  <rect x="50" y="540" width="200" height="24" rx="6" fill="#475569"/>
+  <text x="150" y="557" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">DATA (L4)</text>
 
-  <!-- ==================== LAYER 4: DATABASE ==================== -->
-  <text x="60" y="595" class="text-label">LAYER 4 : DATA LAYER</text>
-  <line x1="60" y1="600" x2="1140" y2="600" stroke="#e8d5c0" stroke-width="1"/>
+  <!-- DB arrow -->
+  <line x1="610" y1="510" x2="610" y2="550" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
 
-  <!-- PostgreSQL -->
-  <rect x="420" y="610" width="180" height="70" fill="url(#db-gradient)" rx="10" ry="10"/>
-  <text x="510" y="636" text-anchor="middle" class="text-white" font-size="13">PostgreSQL 15</text>
-  <text x="510" y="654" text-anchor="middle" class="text-white" font-size="10" opacity="0.85">StatefulSet — 1 Replica</text>
-  <text x="510" y="669" text-anchor="middle" class="text-white" font-size="10" opacity="0.85">Port 5432</text>
+  <rect x="510" y="560" width="200" height="55" rx="12" fill="url(#db-grad)" filter="url(#shadow)"/>
+  <text x="610" y="583" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">PostgreSQL 15</text>
+  <text x="610" y="600" text-anchor="middle" font-size="11" fill="#ddd6fe">StatefulSet — Port 5432</text>
 
-  <!-- Backend → DB arrow -->
-  <line x1="510" y1="535" x2="510" y2="610" class="arrow"/>
-  <polygon points="505,610 510,620 515,610" fill="#5c3d2e"/>
-  <text x="540" y="575" class="text-small">JDBC</text>
-
-  <!-- ==================== RIGHT SIDE: MONITORING ==================== -->
-  <text x="820" y="100" class="text-label">MONITORING STACK</text>
-  <line x1="820" y1="105" x2="1140" y2="105" stroke="#e8d5c0" stroke-width="1"/>
-
-  <!-- Prometheus -->
-  <rect x="820" y="115" width="140" height="65" fill="url(#monitor-gradient)" rx="10" ry="10"/>
-  <text x="890" y="140" text-anchor="middle" class="text-white" font-size="12">Prometheus</text>
-  <text x="890" y="158" text-anchor="middle" class="text-white" font-size="10" opacity="0.85">Scrape Interval: 15s</text>
-  <text x="890" y="172" text-anchor="middle" class="text-white" font-size="10" opacity="0.85">Port 9090</text>
-
-  <!-- Grafana -->
-  <rect x="990" y="115" width="140" height="65" fill="url(#monitor-gradient)" rx="10" ry="10"/>
-  <text x="1060" y="140" text-anchor="middle" class="text-white" font-size="12">Grafana</text>
-  <text x="1060" y="158" text-anchor="middle" class="text-white" font-size="10" opacity="0.85">Dashboards</text>
-  <text x="1060" y="172" text-anchor="middle" class="text-white" font-size="10" opacity="0.85">Port 3001</text>
-
-  <!-- Prometheus → Grafana arrow -->
-  <line x1="960" y1="150" x2="990" y2="150" class="arrow"/>
-  <polygon points="985,145 995,150 985,155" fill="#5c3d2e"/>
-
-  <!-- Metrics from Backend to Prometheus (dashed) -->
-  <line x1="600" y1="430" x2="820" y2="140" class="arrow-dashed"/>
-  <text x="670" y="280" transform="rotate(-50, 670, 280)" class="text-small">/api/metrics</text>
-
-  <!-- ==================== RIGHT SIDE: CI/CD ==================== -->
-  <text x="820" y="230" class="text-label">CI/CD PIPELINE</text>
-  <line x1="820" y1="235" x2="1140" y2="235" stroke="#e8d5c0" stroke-width="1"/>
+  <!-- ================= RIGHT PANEL: DevOps ================= -->
+  <rect x="990" y="85" width="370" height="540" fill="none" stroke="#d4c4b0" stroke-width="1.5" rx="12"/>
+  <rect x="1000" y="90" width="200" height="24" rx="6" fill="#475569"/>
+  <text x="1100" y="107" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">DEVOPS & IaC</text>
 
   <!-- GitHub -->
-  <rect x="820" y="245" width="140" height="50" fill="url(#cicd-gradient)" rx="8" ry="8"/>
-  <text x="890" y="268" text-anchor="middle" class="text-white" font-size="12">GitHub</text>
-  <text x="890" y="283" text-anchor="middle" class="text-white" font-size="10" opacity="0.85">Source Control</text>
+  <rect x="1020" y="120" width="150" height="45" rx="10" fill="url(#cicd-grad)" filter="url(#shadow)"/>
+  <text x="1095" y="140" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">GitHub</text>
+  <text x="1095" y="156" text-anchor="middle" font-size="10" fill="#cbd5e1">Source Control</text>
+
+  <line x1="1095" y1="165" x2="1095" y2="185" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
 
   <!-- Jenkins -->
-  <rect x="820" y="310" width="140" height="65" fill="#0f172a" rx="8" ry="8"/>
-  <text x="890" y="335" text-anchor="middle" class="text-white" font-size="12">Jenkins CI/CD</text>
-  <text x="890" y="352" text-anchor="middle" class="text-white" font-size="10" opacity="0.85">Build → Test → Deploy</text>
-  <text x="890" y="366" text-anchor="middle" class="text-white" font-size="10" opacity="0.85">Slack Notifications</text>
+  <rect x="1020" y="185" width="150" height="55" rx="10" fill="url(#cicd-grad)" filter="url(#shadow)"/>
+  <text x="1095" y="207" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Jenkins CI/CD</text>
+  <text x="1095" y="223" text-anchor="middle" font-size="10" fill="#cbd5e1">10 stages pipeline</text>
+  <text x="1095" y="237" text-anchor="middle" font-size="10" fill="#cbd5e1">Build → Test → Deploy</text>
 
-  <!-- GitHub → Jenkins -->
-  <line x1="890" y1="295" x2="890" y2="310" class="arrow"/>
-  <polygon points="885,310 890,320 895,310" fill="#5c3d2e"/>
+  <!-- Jenkins stages below -->
+  <rect x="1010" y="250" width="330" height="90" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="1175" y="267" text-anchor="middle" font-size="10" font-weight="700" fill="#475569">Pipeline Stages</text>
+  <text x="1020" y="285" font-size="9" fill="#64748b">1. Checkout (GitHub)</text>
+  <text x="1020" y="298" font-size="9" fill="#64748b">2. Install Dependencies (parallel: backend + frontend)</text>
+  <text x="1020" y="311" font-size="9" fill="#64748b">3. Static Analysis (ESLint)</text>
+  <text x="1020" y="324" font-size="9" fill="#64748b">4. Backend Tests + Coverage (94.28%)</text>
+  <text x="1020" y="337" font-size="9" fill="#64748b">5. Build Frontend → 6. Build Docker Images</text>
 
-  <!-- Jenkins → K8s -->
-  <line x1="820" y1="345" x2="750" y2="430" class="arrow-dashed"/>
-  <text x="760" y="390" class="text-small">kubectl apply</text>
+  <!-- Jenkins → K8s dashed -->
+  <line x1="1175" y1="340" x2="1175" y2="370" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-dash)"/>
 
   <!-- Docker Hub -->
-  <rect x="990" y="245" width="140" height="50" fill="url(#cicd-gradient)" rx="8" ry="8"/>
-  <text x="1060" y="268" text-anchor="middle" class="text-white" font-size="12">Docker Hub</text>
-  <text x="1060" y="283" text-anchor="middle" class="text-white" font-size="10" opacity="0.85">Image Registry</text>
+  <rect x="1020" y="370" width="150" height="45" rx="10" fill="#0f172a" filter="url(#shadow)"/>
+  <text x="1095" y="390" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Docker Hub</text>
+  <text x="1095" y="406" text-anchor="middle" font-size="10" fill="#cbd5e1">Image Registry</text>
 
-  <line x1="960" y1="270" x2="990" y2="270" class="arrow"/>
-  <polygon points="985,265 995,270 985,275" fill="#5c3d2e"/>
+  <line x1="1095" y1="415" x2="1095" y2="435" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
 
-  <!-- ==================== BOTTOM RIGHT: IaC ==================== -->
-  <text x="820" y="420" class="text-label">INFRASTRUCTURE AS CODE</text>
-  <line x1="820" y1="425" x2="1140" y2="425" stroke="#e8d5c0" stroke-width="1"/>
+  <!-- K8s Apply -->
+  <rect x="1020" y="435" width="150" height="45" rx="10" fill="url(#k8s-grad)" filter="url(#shadow)"/>
+  <text x="1095" y="455" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">kubectl apply</text>
+  <text x="1095" y="471" text-anchor="middle" font-size="10" fill="#bae6fd">kubectl set image</text>
 
   <!-- Ansible -->
-  <rect x="820" y="435" width="140" height="50" fill="#7c3aed" rx="8" ry="8"/>
-  <text x="890" y="458" text-anchor="middle" class="text-white" font-size="12">Ansible</text>
-  <text x="890" y="473" text-anchor="middle" class="text-white" font-size="10" opacity="0.85">2 Playbooks</text>
+  <rect x="1020" y="495" width="150" height="45" rx="10" fill="url(#iac-grad)" filter="url(#shadow)"/>
+  <text x="1095" y="515" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Ansible</text>
+  <text x="1095" y="531" text-anchor="middle" font-size="10" fill="#e9d5ff">2 Playbooks</text>
 
-  <!-- Terraform -->
-  <rect x="990" y="435" width="140" height="50" fill="#7c3aed" rx="8" ry="8"/>
-  <text x="1060" y="458" text-anchor="middle" class="text-white" font-size="12">Bash Script</text>
-  <text x="1060" y="473" text-anchor="middle" class="text-white" font-size="10" opacity="0.85">Provisioning</text>
+  <!-- Provision script -->
+  <rect x="1020" y="555" width="150" height="45" rx="10" fill="#a855f7" filter="url(#shadow)"/>
+  <text x="1095" y="575" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">provision.sh</text>
+  <text x="1095" y="591" text-anchor="middle" font-size="10" fill="#e9d5ff">VPS Bootstrap</text>
 
-  <!-- ==================== BOTTOM: K8s + Testing ==================== -->
-  <text x="60" y="715" class="text-label">ORCHESTRATION & QUALITY</text>
-  <line x1="60" y1="720" x2="750" y2="720" stroke="#e8d5c0" stroke-width="1"/>
+  <!-- ================= RIGHT PANEL: MONITORING ================= -->
+  <rect x="990" y="635" width="370" height="170" fill="none" stroke="#d4c4b0" stroke-width="1.5" rx="12"/>
+  <rect x="1000" y="640" width="240" height="24" rx="6" fill="#475569"/>
+  <text x="1120" y="657" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">MONITORING & OBSERVABILITY</text>
 
-  <!-- HPA -->
-  <rect x="60" y="730" width="150" height="55" class="box-sm"/>
-  <text x="135" y="755" text-anchor="middle" class="text-label">Horizontal Pod Autoscaler</text>
-  <text x="135" y="773" text-anchor="middle" class="text-small">CPU >70% → scale up</text>
+  <!-- Backend → Prometheus arrow -->
+  <line x1="710" y1="460" x2="1020" y2="685" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-dash)"/>
+  <text x="780" y="575" font-size="10" fill="#64748b">/api/metrics (scrape 15s)</text>
 
-  <!-- Ingress -->
-  <rect x="240" y="730" width="150" height="55" class="box-sm"/>
-  <text x="315" y="755" text-anchor="middle" class="text-label">Ingress Controller</text>
-  <text x="315" y="773" text-anchor="middle" class="text-small">Path-based routing</text>
+  <rect x="1020" y="675" width="150" height="55" rx="10" fill="url(#mon-grad)" filter="url(#shadow)"/>
+  <text x="1095" y="697" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Prometheus</text>
+  <text x="1095" y="714" text-anchor="middle" font-size="10" fill="#fecaca">Scrape interval: 15s</text>
+  <text x="1095" y="727" text-anchor="middle" font-size="10" fill="#fecaca">Port 9090</text>
 
-  <!-- Testing -->
-  <rect x="420" y="730" width="150" height="55" class="box-sm"/>
-  <text x="495" y="753" text-anchor="middle" class="text-label">Test Suite</text>
-  <text x="495" y="770" text-anchor="middle" class="text-small">Jest + Supertest</text>
-  <text x="495" y="783" text-anchor="middle" class="text-small">Coverage: 92%+</text>
+  <line x1="1170" y1="702" x2="1210" y2="702" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
 
-  <!-- Docker -->
-  <rect x="600" y="730" width="140" height="55" class="box-sm"/>
-  <text x="670" y="753" text-anchor="middle" class="text-label">Docker</text>
-  <text x="670" y="770" text-anchor="middle" class="text-small">5 Services</text>
-  <text x="670" y="783" text-anchor="middle" class="text-small">docker-compose</text>
+  <rect x="1210" y="675" width="140" height="55" rx="10" fill="url(#mon-grad)" filter="url(#shadow)"/>
+  <text x="1280" y="697" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Grafana</text>
+  <text x="1280" y="714" text-anchor="middle" font-size="10" fill="#fecaca">Dashboards</text>
+  <text x="1280" y="727" text-anchor="middle" font-size="10" fill="#fecaca">Port 3001</text>
 
-  <!-- ==================== LEGEND ==================== -->
-  <rect x="60" y="810" width="660" height="75" fill="#fff" stroke="#e8d5c0" stroke-width="2" rx="10" ry="10"/>
-  <text x="80" y="835" class="text-label">LEGEND</text>
+  <!-- Metrics detail -->
+  <rect x="1010" y="740" width="330" height="55" rx="8" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="1175" y="757" text-anchor="middle" font-size="10" font-weight="700" fill="#991b1b">Exposed Metrics</text>
+  <text x="1020" y="773" font-size="9" fill="#7f1d1d">tastecam_http_requests_total · tastecam_http_request_duration_seconds</text>
+  <text x="1020" y="788" font-size="9" fill="#7f1d1d">tastecam_recipes_total · tastecam_info · Node.js defaults (CPU, memory)</text>
 
-  <rect x="80" y="845" width="14" height="14" fill="url(#fe-gradient)" rx="3" ry="3"/>
-  <text x="100" y="857" class="text-small">Frontend</text>
+  <!-- ================= BOTTOM: TESTING ================= -->
+  <rect x="40" y="635" width="920" height="80" fill="none" stroke="#d4c4b0" stroke-width="1.5" rx="12"/>
+  <rect x="50" y="640" width="140" height="24" rx="6" fill="#475569"/>
+  <text x="120" y="657" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">QUALITY</text>
 
-  <rect x="200" y="845" width="14" height="14" fill="url(#be-gradient)" rx="3" ry="3"/>
-  <text x="220" y="857" class="text-small">Backend</text>
+  <rect x="60" y="670" width="200" height="35" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="160" y="688" text-anchor="middle" font-size="11" font-weight="700" fill="#16a34a">Unit Tests (5 tests)</text>
+  <text x="160" y="700" text-anchor="middle" font-size="9" fill="#475569">recipesController</text>
 
-  <rect x="320" y="845" width="14" height="14" fill="url(#db-gradient)" rx="3" ry="3"/>
-  <text x="340" y="857" class="text-small">Database</text>
+  <rect x="280" y="670" width="200" height="35" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="380" y="688" text-anchor="middle" font-size="11" font-weight="700" fill="#2563eb">Integration Tests (7 tests)</text>
+  <text x="380" y="700" text-anchor="middle" font-size="9" fill="#475569">Routes via Supertest</text>
 
-  <rect x="440" y="845" width="14" height="14" fill="url(#monitor-gradient)" rx="3" ry="3"/>
-  <text x="460" y="857" class="text-small">Monitoring</text>
+  <rect x="500" y="670" width="200" height="35" rx="8" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="600" y="688" text-anchor="middle" font-size="11" font-weight="700" fill="#7c3aed">Docs Tests (6 tests)</text>
+  <text x="600" y="700" text-anchor="middle" font-size="9" fill="#475569">Swagger OpenAPI</text>
 
-  <line x1="560" y1="852" x2="610" y2="852" class="arrow"/>
-  <text x="618" y="857" class="text-small">Data Flow</text>
+  <rect x="720" y="670" width="220" height="35" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="830" y="688" text-anchor="middle" font-size="11" font-weight="700" fill="#d97706">Coverage: 94.28%</text>
+  <text x="830" y="700" text-anchor="middle" font-size="9" fill="#475569">Threshold: ≥ 80% ✓</text>
 
-  <line x1="80" y1="870" x2="130" y2="870" class="arrow-dashed"/>
-  <text x="138" y="875" class="text-small">Metrics</text>
+  <!-- ================= BOTTOM: DevOps Pipeline Flow ================= -->
+  <rect x="990" y="815" width="370" height="100" fill="none" stroke="#d4c4b0" stroke-width="1.5" rx="12"/>
+  <rect x="1000" y="820" width="200" height="24" rx="6" fill="#475569"/>
+  <text x="1100" y="837" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">DEPLOYMENT</text>
+
+  <rect x="1010" y="850" width="340" height="55" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="1180" y="868" text-anchor="middle" font-size="10" font-weight="700" fill="#475569">CI/CD Flow</text>
+  <text x="1020" y="884" font-size="9" fill="#64748b">Git Push → Jenkins (test → build → docker push) → kubectl set image → RollingUpdate</text>
+  <text x="1020" y="898" font-size="9" fill="#64748b">Smoke Test /api/health → Slack Notification → Grafana Dashboard</text>
+
+  <!-- ================= LEGEND ================= -->
+  <rect x="40" y="730" width="920" height="55" rx="10" fill="#fff" stroke="#d4c4b0" stroke-width="1.5"/>
+  <text x="60" y="752" font-size="12" font-weight="700" fill="#1e293b">LEGEND</text>
+
+  <rect x="60" y="760" width="14" height="14" rx="3" fill="url(#fe-grad)"/>
+  <text x="80" y="772" font-size="10" fill="#475569">Frontend</text>
+
+  <rect x="160" y="760" width="14" height="14" rx="3" fill="url(#be-grad)"/>
+  <text x="180" y="772" font-size="10" fill="#475569">Backend</text>
+
+  <rect x="260" y="760" width="14" height="14" rx="3" fill="url(#db-grad)"/>
+  <text x="280" y="772" font-size="10" fill="#475569">Database</text>
+
+  <rect x="370" y="760" width="14" height="14" rx="3" fill="url(#mon-grad)"/>
+  <text x="390" y="772" font-size="10" fill="#475569">Monitoring</text>
+
+  <rect x="480" y="760" width="14" height="14" rx="3" fill="url(#cicd-grad)"/>
+  <text x="500" y="772" font-size="10" fill="#475569">CI/CD</text>
+
+  <rect x="560" y="760" width="14" height="14" rx="3" fill="url(#k8s-grad)"/>
+  <text x="580" y="772" font-size="10" fill="#475569">Kubernetes</text>
+
+  <line x1="670" y1="767" x2="710" y2="767" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="718" y="772" font-size="10" fill="#475569">Data Flow</text>
+
+  <line x1="800" y1="767" x2="840" y2="767" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-dash)"/>
+  <text x="848" y="772" font-size="10" fill="#475569">Metrics</text>
 
   <!-- Version -->
-  <text x="1140" y="895" text-anchor="end" class="text-small">v2.0 — TasteCam Heritage Architecture</text>
+  <text x="1380" y="1040" text-anchor="end" font-size="11" fill="#94a3b8">v3.0 — TasteCam Heritage Architecture | SEN3244</text>
 </svg>
