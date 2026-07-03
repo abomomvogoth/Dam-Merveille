@@ -1,0 +1,318 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 1000" font-family="Arial, Segoe UI, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0f4f8"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <linearGradient id="user-g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#4f46e5"/>
+    </linearGradient>
+    <linearGradient id="fe-g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <linearGradient id="be-g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <linearGradient id="db-g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="mon-g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#dc2626"/>
+    </linearGradient>
+    <linearGradient id="cicd-g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="iac-g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#9333ea"/>
+    </linearGradient>
+    <linearGradient id="k8s-g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+    <linearGradient id="docker-g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="3" stdDeviation="4" flood-opacity="0.15"/>
+    </filter>
+    <marker id="arrow-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M0,1 L9,5 L0,9" fill="#475569"/>
+    </marker>
+    <marker id="arrow-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M0,1 L9,5 L0,9" fill="#dc2626"/>
+    </marker>
+    <marker id="arrow-dash" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M0,1 L9,5 L0,9" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1300" height="1000" fill="url(#bg)" rx="16"/>
+
+  <!-- Title -->
+  <rect x="300" y="15" width="700" height="42" rx="21" fill="#1e293b"/>
+  <text x="650" y="43" text-anchor="middle" font-size="20" font-weight="700" fill="#fff">TasteCam Heritage — Architecture Diagram (SEN3244)</text>
+
+  <!-- ======================== L1: USER ======================== -->
+  <!-- Layer label -->
+  <rect x="30" y="75" width="160" height="26" rx="6" fill="#4f46e5"/>
+  <text x="110" y="93" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">L1 — USER LAYER</text>
+
+  <!-- User box -->
+  <rect x="550" y="80" width="200" height="55" rx="12" fill="url(#user-g)" filter="url(#shadow)"/>
+  <text x="650" y="105" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">👤 End User</text>
+  <text x="650" y="125" text-anchor="middle" font-size="11" fill="#c7d2fe">Web Browser (Chrome/Firefox)</text>
+
+  <!-- Arrow down -->
+  <line x1="650" y1="135" x2="650" y2="175" stroke="#475569" stroke-width="2.5" marker-end="url(#arrow-b)"/>
+
+  <!-- ======================== L2: FRONTEND ======================== -->
+  <rect x="30" y="180" width="1240" height="85" rx="10" fill="#fff" stroke="#d1d5db" stroke-width="1.5" opacity="0.5"/>
+  <rect x="45" y="185" width="180" height="26" rx="6" fill="#059669"/>
+  <text x="135" y="203" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">L2 — FRONTEND</text>
+
+  <rect x="550" y="190" width="220" height="65" rx="12" fill="url(#fe-g)" filter="url(#shadow)"/>
+  <text x="660" y="215" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">React App (Vite)</text>
+  <text x="660" y="233" text-anchor="middle" font-size="11" fill="#d1fae5">Port 3000 — Responsive UI</text>
+  <text x="660" y="248" text-anchor="middle" font-size="10" fill="#a7f3d0">10 recipes · FR/EN · Portion calculator</text>
+
+  <!-- Arrow down -->
+  <line x1="660" y1="265" x2="660" y2="305" stroke="#475569" stroke-width="2.5" marker-end="url(#arrow-b)"/>
+  <text x="670" y="285" font-size="10" fill="#475569">HTTP / REST</text>
+
+  <!-- ======================== L3: BACKEND ======================== -->
+  <rect x="30" y="310" width="1240" height="130" rx="10" fill="#fff" stroke="#d1d5db" stroke-width="1.5" opacity="0.5"/>
+  <rect x="45" y="315" width="180" height="26" rx="6" fill="#2563eb"/>
+  <text x="135" y="333" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">L3 — BACKEND API</text>
+
+  <rect x="550" y="325" width="220" height="55" rx="12" fill="url(#be-g)" filter="url(#shadow)"/>
+  <text x="660" y="348" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">Express.js API</text>
+  <text x="660" y="366" text-anchor="middle" font-size="11" fill="#bfdbfe">Port 4000 — REST endpoints</text>
+
+  <!-- Sub-boxes under backend -->
+  <rect x="380" y="395" width="170" height="35" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="465" y="417" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">GET /api/recipes</text>
+
+  <rect x="565" y="395" width="170" height="35" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="650" y="417" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">GET /api/recipes/:id</text>
+
+  <rect x="750" y="395" width="170" height="35" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="835" y="417" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">GET /api/recipes/search</text>
+
+  <!-- Swagger badge -->
+  <rect x="380" y="325" width="120" height="30" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="440" y="345" text-anchor="middle" font-size="10" font-weight="700" fill="#92400e">📖 Swagger UI</text>
+  <text x="440" y="352" text-anchor="middle" font-size="8" fill="#92400e">/api/docs</text>
+
+  <!-- Metrics badge -->
+  <rect x="380" y="360" width="120" height="30" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="440" y="380" text-anchor="middle" font-size="10" font-weight="700" fill="#991b1b">📊 Prometheus</text>
+  <text x="440" y="387" text-anchor="middle" font-size="8" fill="#991b1b">/api/metrics</text>
+
+  <!-- Backend → DB arrow -->
+  <line x1="660" y1="440" x2="660" y2="480" stroke="#475569" stroke-width="2.5" marker-end="url(#arrow-b)"/>
+  <text x="670" y="460" font-size="10" fill="#475569">SQL queries</text>
+
+  <!-- ======================== L4: DATABASE ======================== -->
+  <rect x="30" y="485" width="1240" height="75" rx="10" fill="#fff" stroke="#d1d5db" stroke-width="1.5" opacity="0.5"/>
+  <rect x="45" y="490" width="180" height="26" rx="6" fill="#7c3aed"/>
+  <text x="135" y="508" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">L4 — DATABASE</text>
+
+  <rect x="550" y="495" width="220" height="55" rx="12" fill="url(#db-g)" filter="url(#shadow)"/>
+  <text x="660" y="518" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">PostgreSQL 15</text>
+  <text x="660" y="536" text-anchor="middle" font-size="11" fill="#ddd6fe">Port 5432 — 6 tables</text>
+
+  <!-- ======================== RIGHT: DOCKER + K8s ======================== -->
+  <!-- Section background -->
+  <rect x="840" y="180" width="420" height="380" rx="12" fill="#fff" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 3" opacity="0.6"/>
+  <text x="1050" y="205" text-anchor="middle" font-size="13" font-weight="700" fill="#475569">CONTAINERIZATION & ORCHESTRATION</text>
+
+  <!-- Docker -->
+  <rect x="870" y="215" width="170" height="55" rx="10" fill="url(#docker-g)" filter="url(#shadow)"/>
+  <text x="955" y="238" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">🐳 Docker</text>
+  <text x="955" y="256" text-anchor="middle" font-size="10" fill="#bae6fd">5 services (compose)</text>
+  <text x="955" y="269" text-anchor="middle" font-size="10" fill="#bae6fd">backend + frontend + db + prom + grafana</text>
+
+  <!-- K8s box -->
+  <rect x="870" y="285" width="170" height="130" rx="10" fill="url(#k8s-g)" filter="url(#shadow)"/>
+  <text x="955" y="308" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">☸ Kubernetes</text>
+
+  <rect x="880" y="318" width="150" height="20" rx="4" fill="#0c4a6e" opacity="0.5"/>
+  <text x="955" y="333" text-anchor="middle" font-size="9" fill="#bae6fd">9 manifests</text>
+
+  <rect x="880" y="342" width="150" height="20" rx="4" fill="#0c4a6e" opacity="0.5"/>
+  <text x="955" y="357" text-anchor="middle" font-size="9" fill="#bae6fd">Deployments (FE + BE)</text>
+
+  <rect x="880" y="366" width="150" height="20" rx="4" fill="#0c4a6e" opacity="0.5"/>
+  <text x="955" y="381" text-anchor="middle" font-size="9" fill="#bae6fd">Services (ClusterIP)</text>
+
+  <rect x="880" y="390" width="150" height="20" rx="4" fill="#0c4a6e" opacity="0.5"/>
+  <text x="955" y="405" text-anchor="middle" font-size="9" fill="#bae6fd">Ingress + HPA + Secrets</text>
+
+  <!-- K8s features -->
+  <rect x="1060" y="215" width="180" height="65" rx="8" fill="#f0f9ff" stroke="#0284c7" stroke-width="1"/>
+  <text x="1150" y="235" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">RollingUpdate</text>
+  <text x="1150" y="250" text-anchor="middle" font-size="10" fill="#475569">maxUnavailable = 0</text>
+  <text x="1150" y="265" text-anchor="middle" font-size="10" fill="#475569">Zero-downtime deploy</text>
+
+  <rect x="1060" y="290" width="180" height="65" rx="8" fill="#f0f9ff" stroke="#0284c7" stroke-width="1"/>
+  <text x="1150" y="310" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Horizontal Pod Autoscaler</text>
+  <text x="1150" y="325" text-anchor="middle" font-size="10" fill="#475569">CPU > 70% → scale up</text>
+  <text x="1150" y="340" text-anchor="middle" font-size="10" fill="#475569">2 → 10 replicas (BE)</text>
+
+  <rect x="1060" y="365" width="180" height="50" rx="8" fill="#f0f9ff" stroke="#0284c7" stroke-width="1"/>
+  <text x="1150" y="385" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Health Probes</text>
+  <text x="1150" y="400" text-anchor="middle" font-size="10" fill="#475569">Liveness + Readiness</text>
+
+  <!-- Arrow from app to Docker -->
+  <line x1="790" y1="355" x2="870" y2="245" stroke="#475569" stroke-width="2" marker-end="url(#arrow-b)"/>
+  <text x="810" y="290" font-size="9" fill="#475569">deploy</text>
+
+  <!-- ======================== BOTTOM LEFT: CI/CD ======================== -->
+  <rect x="30" y="580" width="780" height="200" rx="10" fill="#fff" stroke="#d1d5db" stroke-width="1.5" opacity="0.5"/>
+  <rect x="45" y="585" width="140" height="26" rx="6" fill="#0f172a"/>
+  <text x="115" y="603" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">L5 — CI/CD</text>
+
+  <!-- CI/CD pipeline flow -->
+  <rect x="60" y="620" width="140" height="50" rx="8" fill="#0f172a" filter="url(#shadow)"/>
+  <text x="130" y="642" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">GitHub</text>
+  <text x="130" y="658" text-anchor="middle" font-size="9" fill="#94a3b8">Source Code</text>
+
+  <line x1="200" y1="645" x2="240" y2="645" stroke="#475569" stroke-width="2.5" marker-end="url(#arrow-b)"/>
+  <text x="220" y="638" font-size="9" fill="#475569">push</text>
+
+  <rect x="250" y="620" width="180" height="65" rx="8" fill="#0f172a" filter="url(#shadow)"/>
+  <text x="340" y="642" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">Jenkins Pipeline</text>
+  <text x="340" y="658" text-anchor="middle" font-size="9" fill="#94a3b8">10 stages</text>
+  <text x="340" y="672" text-anchor="middle" font-size="9" fill="#94a3b8">Test → Build → Deploy</text>
+  <text x="340" y="683" text-anchor="middle" font-size="9" fill="#94a3b8">Coverage ≥ 80%</text>
+
+  <line x1="430" y1="645" x2="470" y2="645" stroke="#475569" stroke-width="2.5" marker-end="url(#arrow-b)"/>
+  <text x="450" y="638" font-size="9" fill="#475569">push</text>
+
+  <rect x="480" y="620" width="150" height="50" rx="8" fill="#0ea5e9" filter="url(#shadow)"/>
+  <text x="555" y="642" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">Docker Hub</text>
+  <text x="555" y="658" text-anchor="middle" font-size="9" fill="#e0f2fe">Image Registry</text>
+
+  <line x1="630" y1="645" x2="670" y2="645" stroke="#475569" stroke-width="2.5" marker-end="url(#arrow-b)"/>
+
+  <rect x="680" y="620" width="120" height="50" rx="8" fill="url(#k8s-g)" filter="url(#shadow)"/>
+  <text x="740" y="642" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">K8s Cluster</text>
+  <text x="740" y="658" text-anchor="middle" font-size="9" fill="#bae6fd">kubectl apply</text>
+
+  <!-- Pipeline detail -->
+  <rect x="60" y="690" width="740" height="40" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="75" y="710" font-size="10" fill="#475569">Pipeline: Checkout → Install (parallel FE+BE) → ESLint → Jest Tests (94.28%) → Build Frontend → Docker Build → Docker Push → K8s Deploy → Smoke Test → Security Scan</text>
+
+  <!-- Slack notification -->
+  <rect x="180" y="740" width="200" height="30" rx="6" fill="#f8fafc" stroke="#64748b" stroke-width="1"/>
+  <text x="280" y="760" text-anchor="middle" font-size="10" fill="#475569">📱 Slack Notification (success/fail)</text>
+
+  <!-- ======================== RIGHT: MONITORING ======================== -->
+  <rect x="840" y="580" width="420" height="200" rx="10" fill="#fff" stroke="#d1d5db" stroke-width="1.5" opacity="0.5"/>
+  <rect x="855" y="585" width="180" height="26" rx="6" fill="#dc2626"/>
+  <text x="945" y="603" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">MONITORING</text>
+
+  <!-- Arrow from metrics to Prometheus -->
+  <line x1="660" y1="395" x2="900" y2="650" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-r)"/>
+  <text x="695" y="510" font-size="10" fill="#dc2626">/api/metrics (scrape every 15s)</text>
+
+  <rect x="870" y="625" width="160" height="55" rx="10" fill="url(#mon-g)" filter="url(#shadow)"/>
+  <text x="950" y="648" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">Prometheus</text>
+  <text x="950" y="666" text-anchor="middle" font-size="10" fill="#fecaca">Port 9090</text>
+  <text x="950" y="680" text-anchor="middle" font-size="10" fill="#fecaca">Time-series DB</text>
+
+  <line x1="1030" y1="652" x2="1070" y2="652" stroke="#475569" stroke-width="2.5" marker-end="url(#arrow-b)"/>
+
+  <rect x="1080" y="625" width="160" height="55" rx="10" fill="url(#mon-g)" filter="url(#shadow)"/>
+  <text x="1160" y="648" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">Grafana</text>
+  <text x="1160" y="666" text-anchor="middle" font-size="10" fill="#fecaca">Port 3001</text>
+  <text x="1160" y="680" text-anchor="middle" font-size="10" fill="#fecaca">Dashboards</text>
+
+  <!-- Metrics detail -->
+  <rect x="855" y="695" width="390" height="75" rx="8" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="1050" y="715" text-anchor="middle" font-size="12" font-weight="700" fill="#991b1b">Metrics Exposed</text>
+  <text x="870" y="733" font-size="10" fill="#7f1d1d">• tastecam_http_requests_total (Counter: method, route, status)</text>
+  <text x="870" y="748" font-size="10" fill="#7f1d1d">• tastecam_http_request_duration_seconds (Histogram: buckets 10ms–5s)</text>
+  <text x="870" y="763" font-size="10" fill="#7f1d1d">• tastecam_recipes_total (Gauge) • tastecam_info • Node.js defaults</text>
+
+  <!-- ======================== BOTTOM: IaC ======================== -->
+  <rect x="30" y="800" width="780" height="90" rx="10" fill="#fff" stroke="#d1d5db" stroke-width="1.5" opacity="0.5"/>
+  <rect x="45" y="805" width="180" height="26" rx="6" fill="#9333ea"/>
+  <text x="135" y="823" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">INFRASTRUCTURE AS CODE</text>
+
+  <rect x="60" y="840" width="220" height="40" rx="8" fill="url(#iac-g)" filter="url(#shadow)"/>
+  <text x="170" y="860" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Ansible Playbook 1</text>
+  <text x="170" y="875" text-anchor="middle" font-size="9" fill="#e9d5ff">playbook-install.yml (Node + Docker + PM2)</text>
+
+  <line x1="280" y1="860" x2="330" y2="860" stroke="#475569" stroke-width="2" marker-end="url(#arrow-b)"/>
+
+  <rect x="340" y="840" width="220" height="40" rx="8" fill="url(#iac-g)" filter="url(#shadow)"/>
+  <text x="450" y="860" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Ansible Playbook 2</text>
+  <text x="450" y="875" text-anchor="middle" font-size="9" fill="#e9d5ff">playbook-deploy.yml (Clone + Install + Start)</text>
+
+  <line x1="560" y1="860" x2="610" y2="860" stroke="#475569" stroke-width="2" marker-end="url(#arrow-b)"/>
+
+  <rect x="620" y="840" width="180" height="40" rx="8" fill="#a855f7" filter="url(#shadow)"/>
+  <text x="710" y="860" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">provision.sh</text>
+  <text x="710" y="875" text-anchor="middle" font-size="9" fill="#e9d5ff">VPS bootstrap script</text>
+
+  <!-- ======================== RIGHT BOTTOM: TESTING ======================== -->
+  <rect x="840" y="800" width="420" height="90" rx="10" fill="#fff" stroke="#d1d5db" stroke-width="1.5" opacity="0.5"/>
+  <rect x="855" y="805" width="140" height="26" rx="6" fill="#16a34a"/>
+  <text x="925" y="823" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">TESTING</text>
+
+  <rect x="860" y="835" width="120" height="45" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="920" y="855" text-anchor="middle" font-size="11" font-weight="700" fill="#16a34a">Unit Tests</text>
+  <text x="920" y="872" text-anchor="middle" font-size="9" fill="#475569">5 tests</text>
+
+  <rect x="990" y="835" width="120" height="45" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="1050" y="855" text-anchor="middle" font-size="11" font-weight="700" fill="#2563eb">Integration</text>
+  <text x="1050" y="872" text-anchor="middle" font-size="9" fill="#475569">7 tests</text>
+
+  <rect x="1120" y="835" width="130" height="45" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="1185" y="855" text-anchor="middle" font-size="11" font-weight="700" fill="#d97706">Coverage</text>
+  <text x="1185" y="872" text-anchor="middle" font-size="9" fill="#475569">94.28% ✓</text>
+
+  <!-- ======================== LEGEND ======================== -->
+  <rect x="30" y="910" width="1240" height="50" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="50" y="932" font-size="12" font-weight="700" fill="#1e293b">LEGEND</text>
+
+  <rect x="50" y="940" width="12" height="12" rx="3" fill="url(#fe-g)"/>
+  <text x="67" y="951" font-size="10" fill="#475569">Frontend</text>
+
+  <rect x="150" y="940" width="12" height="12" rx="3" fill="url(#be-g)"/>
+  <text x="167" y="951" font-size="10" fill="#475569">Backend</text>
+
+  <rect x="245" y="940" width="12" height="12" rx="3" fill="url(#db-g)"/>
+  <text x="262" y="951" font-size="10" fill="#475569">Database</text>
+
+  <rect x="345" y="940" width="12" height="12" rx="3" fill="url(#mon-g)"/>
+  <text x="362" y="951" font-size="10" fill="#475569">Monitoring</text>
+
+  <rect x="450" y="940" width="12" height="12" rx="3" fill="url(#cicd-g)"/>
+  <text x="467" y="951" font-size="10" fill="#475569">CI/CD</text>
+
+  <rect x="530" y="940" width="12" height="12" rx="3" fill="url(#k8s-g)"/>
+  <text x="547" y="951" font-size="10" fill="#475569">K8s</text>
+
+  <rect x="605" y="940" width="12" height="12" rx="3" fill="url(#iac-g)"/>
+  <text x="622" y="951" font-size="10" fill="#475569">IaC</text>
+
+  <line x1="690" y1="945" x2="730" y2="945" stroke="#475569" stroke-width="2" marker-end="url(#arrow-b)"/>
+  <text x="737" y="951" font-size="10" fill="#475569">HTTP/data flow</text>
+
+  <line x1="830" y1="945" x2="870" y2="945" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-r)"/>
+  <text x="877" y="951" font-size="10" fill="#475569">Metrics scrape</text>
+
+  <!-- Footer -->
+  <text x="1270" y="990" text-anchor="end" font-size="10" fill="#94a3b8">TasteCam Heritage — Architecture v3.1 — SEN3244 — June 2026</text>
+</svg>
